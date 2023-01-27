@@ -26,8 +26,6 @@ public class DecideTests {
         Decide.X = new double[] {1, 3};
         Decide.Y = new double[] {2, 5};
         Assertions.assertTrue(Decide.LIC0());
-
-
     }
 
     @Test
