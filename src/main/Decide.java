@@ -1,3 +1,5 @@
+package main;
+
 public class Decide {
     enum Connectors{NOTUSED, ORR, ANDD};
 
