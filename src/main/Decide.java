@@ -1,28 +1,28 @@
 package main;
 
 public class Decide {
-    enum Connectors{NOTUSED, ORR, ANDD};
+    public enum Connectors{NOTUSED, ORR, ANDD};
 
     //All "global" variables
-    static Parameters_t PARAMETERS;
+    public static Parameters_t PARAMETERS;
 
-    static double[] X;
+    public static double[] X;
 
-    static double[] Y;
+    public static double[] Y;
 
-    static int NUMPOINTS;
+    public static int NUMPOINTS;
 
-    static Connectors[][] LCM;
+    public static Connectors[][] LCM;
 
-    static Boolean[][] PUM;
+    public static Boolean[][] PUM;
 
-    static Boolean[] PUV;
+    public static Boolean[] PUV;
 
-    static Boolean[] CMV;
+    public static Boolean[] CMV;
 
-    static Boolean[] FUV;
+    public static Boolean[] FUV;
 
-    static Boolean LAUNCH;
+    public static Boolean LAUNCH;
 
     public static void DECIDE(){
         //TODO: Evaluate LICS and generate the CMV
