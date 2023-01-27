@@ -31,7 +31,15 @@ public class Decide {
         //TODO: Evaluate LAUNCH and print
     }
 
+    // Launch Interceptor Condition 0. For further details, see documented requirements.
     public static Boolean LIC0(){
+
+        for(int i = 0; i < NUMPOINTS-1; i++){
+            // Euclidean distance
+            double distance = Math.sqrt( Math.pow(X[i]-X[i+1], 2) + Math.pow(Y[i]-Y[i+1], 2) );
+            if(distance > PARAMETERS.LENGTH1)
+                return true;
+        }
         return false;
     }
 }
