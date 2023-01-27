@@ -20,17 +20,22 @@ public class DecideTests {
     }
 
     @Test
-    public void testLIC0(){
+    public void test_LIC0_true(){
         Decide.NUMPOINTS = 2;
-
-        // Expected output: true
         Decide.PARAMETERS.LENGTH1 = 1;
         Decide.X = new double[] {1, 3};
         Decide.Y = new double[] {2, 5};
         Assertions.assertTrue(Decide.LIC0());
 
-        // Expected output: false
+
+    }
+
+    @Test
+    public void test_LIC0_false(){
+        Decide.NUMPOINTS = 2;
         Decide.PARAMETERS.LENGTH1 = 10;
+        Decide.X = new double[] {1, 3};
+        Decide.Y = new double[] {2, 5};
         Assertions.assertFalse(Decide.LIC0());
     }
 }
