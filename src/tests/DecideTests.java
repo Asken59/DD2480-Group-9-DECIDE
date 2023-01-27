@@ -21,4 +21,22 @@ public class DecideTests {
     public void testLIC0(){
         Assertions.assertTrue(true);
     }
+
+    @Test
+    public void test_LIC1_true(){
+        Decide.X = new double[] {1, 5, 1, 2, 3, 5};
+        Decide.Y = new double[] {1, 1, 5, 3, 1, 4};
+        Decide.PARAMETERS.RADIUS1 = 2;
+        Decide.NUMPOINTS = 6;
+        Assertions.assertTrue(Decide.LIC1());
+    }
+
+    @Test
+    public void test_LIC1_false(){
+        Decide.X = new double[] {1, 2, 1, 2, 1, 3};
+        Decide.Y = new double[] {1, 1, 2, 2, 3, 2};
+        Decide.PARAMETERS.RADIUS1 = 3;
+        Decide.NUMPOINTS = 6;
+        Assertions.assertFalse(Decide.LIC1());
+    }
 }
