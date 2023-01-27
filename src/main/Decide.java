@@ -37,7 +37,6 @@ public class Decide {
 
     public static Boolean LIC2(){ //Decide if 3 cons. points satisfies an angle < (PI - EPSILON) or > (PI + EPSILON)
         double angle = 0;
-        double tempPI = Math.PI; //Need to add the constant to the class?
         double sideA = 0;
         double sideSqrtA = 0;
         double sideB = 0;
@@ -56,7 +55,7 @@ public class Decide {
                 //Calculate angle using law of cosine
                 angle = Math.acos((sideA + sideC - sideB)/(2*sideSqrtA*sideSqrtC));
 
-                if(angle < tempPI - PARAMETERS.EPSILON || angle > tempPI + PARAMETERS.EPSILON){
+                if(angle < Math.PI - PARAMETERS.EPSILON || angle > Math.PI + PARAMETERS.EPSILON){
                     return true;
                 }
             }
