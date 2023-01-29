@@ -42,4 +42,36 @@ public class Decide {
         }
         return false;
     }
+
+    // Launch Interceptor Condition 10. For further details, see documented requirements.
+    public static Boolean LIC10(){
+
+        // The condition is not met if:
+        if( (NUMPOINTS < 5) || (PARAMETERS.E_PTS < 1) || (PARAMETERS.F_PTS < 1) ||
+            (PARAMETERS.E_PTS+PARAMETERS.F_PTS <= NUMPOINTS-3) )
+            return false;
+
+        // First point
+        for(int i = 0; i < (NUMPOINTS-2-PARAMETERS.E_PTS-PARAMETERS.F_PTS); i++){
+
+            // Second point, preceded by E_PTS consecutive intervening points
+            int j = i + PARAMETERS.E_PTS + 1;
+
+            // Third point, preceded by F_PTS consecutive intervening points
+            int k = j + PARAMETERS.F_PTS + 1;
+
+            // Compute the sides of the triangle formed by the three points
+            double ij = Math.sqrt( Math.pow(X[i]-X[j], 2) + Math.pow(Y[i]-Y[j], 2) );
+            double ik = Math.sqrt( Math.pow(X[i]-X[k], 2) + Math.pow(Y[i]-Y[k], 2) );
+            double jk = Math.sqrt( Math.pow(X[j]-X[k], 2) + Math.pow(Y[j]-Y[k], 2) );
+
+            // Compute the area of the triangle using Heron's formula
+            double s = 0.5 * (ij + ik + jk);
+            double area = Math.sqrt( s * (s-ij) * (s-ik) * (s-jk) );
+
+            // Evaluate
+            if(area > PARAMETERS.AREA1) return true;
+        }
+        return false;
+    }
 }
