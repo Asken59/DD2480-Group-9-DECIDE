@@ -74,7 +74,7 @@ public class DecideTests {
         Decide.PARAMETERS.D_PTS = 1;
         Decide.PARAMETERS.EPSILON = (5 * Math.PI) / 6; // 5PI/6 radians = 150 degrees
         Decide.X = new double[] {0, 1, 2, 3, 4};
-        Decide.Y = new double[] {0, 1, 3, 1, 9};
+        Decide.Y = new double[] {0, 1, 3, 1, 0};
         Assertions.assertFalse(Decide.LIC9());
     }
 
