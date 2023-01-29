@@ -48,7 +48,7 @@ public class Decide {
 
         // The condition is not met if:
         if( (NUMPOINTS < 5) || (PARAMETERS.E_PTS < 1) || (PARAMETERS.F_PTS < 1) ||
-            (PARAMETERS.E_PTS+PARAMETERS.F_PTS <= NUMPOINTS-3) )
+            (PARAMETERS.E_PTS+PARAMETERS.F_PTS < NUMPOINTS-3) )
             return false;
 
         // First point
