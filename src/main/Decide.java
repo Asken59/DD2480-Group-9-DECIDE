@@ -106,7 +106,7 @@ public class Decide {
 
         // The condition cannot be met if:
         if( (NUMPOINTS < 5) || (PARAMETERS.C_PTS < 1) ||
-            (PARAMETERS.D_PTS < 1) || (PARAMETERS.C_PTS + PARAMETERS.D_PTS <= NUMPOINTS-3) )
+            (PARAMETERS.D_PTS < 1) || (PARAMETERS.C_PTS + PARAMETERS.D_PTS > NUMPOINTS-3) )
             return false;
 
         // First point of the set of three points
