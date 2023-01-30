@@ -101,6 +101,73 @@ public class Decide {
         return false;
     }
 
+    public static Boolean LIC8() {
+
+        if (NUMPOINTS < 5 || PARAMETERS.A_PTS < 1 || PARAMETERS.B_PTS < 1 ||
+            PARAMETERS.A_PTS + PARAMETERS.B_PTS > NUMPOINTS - 3) {
+            return false;
+        }
+
+        for (int i=0; i < NUMPOINTS-2-PARAMETERS.A_PTS-PARAMETERS.B_PTS; i++) {
+
+            double x1 = X[i];
+            double y1 = Y[i];
+            double x2 = X[i + PARAMETERS.A_PTS + 1];
+            double y2 = Y[i + PARAMETERS.A_PTS + 1];
+            double x3 = X[i + PARAMETERS.A_PTS + PARAMETERS.B_PTS + 2];
+            double y3 = Y[i + PARAMETERS.A_PTS + PARAMETERS.B_PTS + 2];
+
+            // Calculates distances between data points
+            double a = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+            double b = Math.sqrt(Math.pow((x1 - x3), 2) + Math.pow((y1 - y3), 2));
+            double c = Math.sqrt(Math.pow((x2 - x3), 2) + Math.pow((y2 - y3), 2));
+
+            // Takes the largest distance
+            double max_distance = Math.max(Math.max(a, b), c);
+
+            // If the largest distance is twice the radius there is no chance to fit all points inside circle
+            if ((max_distance / 2) > PARAMETERS.RADIUS1) {
+                return true;
+            }
+
+            // Check if any of the angles are obtuse
+            boolean obtuse = false;
+            if (max_distance == a) {
+                if (Math.toDegrees(Math.acos((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b))) > 90) {
+                    obtuse = true;
+                }
+            }
+            else if (max_distance == b) {
+                if (Math.toDegrees(Math.acos((Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) / (2 * a * c))) > 90) {
+                    obtuse = true;
+                }
+            }
+            else if (max_distance == c) {
+                if (Math.toDegrees(Math.acos((Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c))) > 90) {
+                    obtuse = true;
+                }
+            }
+
+            // If any angle is obtuse, all three points has to be on circle formed
+            if (obtuse) {
+                double s = (a * b * c) / 2;
+                double radius = (a * b * c) / (4 * Math.sqrt(s * (s - a) * (s - b) * (s - c)));
+                if (radius > PARAMETERS.RADIUS1) {
+                    return true;
+                }
+            }
+            // Otherwise the radius of the minimum circle created is half the largest distance between two points
+            else {
+                if ((max_distance / 2) > PARAMETERS.RADIUS1) {
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
+    }
+
     // Launch Interceptor Condition 9. For further details, see documented requirements.
     public static Boolean LIC9(){
 

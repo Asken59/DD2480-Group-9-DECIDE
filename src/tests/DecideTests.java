@@ -54,6 +54,26 @@ public class DecideTests {
         Decide.PARAMETERS.RADIUS1 = 3;
         Decide.NUMPOINTS = 6;
         Assertions.assertFalse(Decide.LIC1());
+    }    @Test
+    public void test_LIC8_true() {
+        Decide.X = new double[]{6, 3, 2, -1, 1};
+        Decide.Y = new double[]{2, 4, 8, 7, 2};
+        Decide.PARAMETERS.RADIUS1 = 3;
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.A_PTS = 1;
+        Decide.PARAMETERS.B_PTS = 1;
+        Assertions.assertTrue(Decide.LIC8());
+    }
+
+    @Test
+    public void test_LIC8_false() {
+        Decide.X = new double[]{6, 3, 2, -1, 1};
+        Decide.Y = new double[]{2, 4, 2.5, 7, 2};
+        Decide.PARAMETERS.RADIUS1 = 3;
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.A_PTS = 1;
+        Decide.PARAMETERS.B_PTS = 1;
+        Assertions.assertFalse(Decide.LIC8());
     }
 
     @Test
