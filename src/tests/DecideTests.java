@@ -54,4 +54,29 @@ public class DecideTests {
         Decide.NUMPOINTS = 6;
         Assertions.assertFalse(Decide.LIC1());
     }
+
+
+    @Test
+    public void test_LIC7_true(){
+        Decide.X = new double[] {1, 2, 1, 2, 5, 3};
+        Decide.Y = new double[] {1, 1, 2, 2, 6, 2};
+        Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Assertions.assertTrue(Decide.LIC7());
+    }
+
+    @Test
+    public void test_LIC7_false(){
+        Decide.X = new double[] {1, 2, 1, 2, 2, 3};
+        Decide.Y = new double[] {1, 1, 2, 2, 2, 2};
+        Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Assertions.assertFalse(Decide.LIC7());
+    }
+
+
 }
+
+    
