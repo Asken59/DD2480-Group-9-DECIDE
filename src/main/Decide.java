@@ -42,4 +42,17 @@ public class Decide {
         }
         return false;
     }
+    // There exists at least one set of two consecutive data points, (X[i],Y[i]) and (X[j],Y[j]), such
+    // that X[j] - X[i] < 0. (where i = j-1)
+    public static Boolean LIC5(){
+
+        for(int i = 0; i < NUMPOINTS-1; i++){
+
+            if((X[i + 1] - X[i]) < 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
