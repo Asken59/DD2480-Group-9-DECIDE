@@ -209,6 +209,28 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC10());
     }
 
+    @Test
+    public void test_LIC12_true(){
+        Decide.X = new double[] {1, 2, 1, 2, 5, 3};
+        Decide.Y = new double[] {1, 1, 2, 2, 6, 2};
+        Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Decide.PARAMETERS.LENGTH2 = 10;
+        Assertions.assertTrue(Decide.LIC12());
+    }
+
+    @Test
+    public void test_LIC12_false(){
+        Decide.X = new double[] {1, 2, 1, 2, 2, 3};
+        Decide.Y = new double[] {1, 1, 2, 2, 2, 2};
+        Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 1;
+        Decide.PARAMETERS.LENGTH2 = 1;
+        Assertions.assertFalse(Decide.LIC12());
+    }
+
 }
 
     
