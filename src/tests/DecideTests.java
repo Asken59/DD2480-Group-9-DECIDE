@@ -2,12 +2,9 @@ package tests;
 
 import main.Decide;
 import main.Parameters_t;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import main.Decide;
 
 public class DecideTests {
 
@@ -54,7 +51,27 @@ public class DecideTests {
         Decide.PARAMETERS.RADIUS1 = 3;
         Decide.NUMPOINTS = 6;
         Assertions.assertFalse(Decide.LIC1());
-    }    @Test
+    }
+
+    @Test
+    public void test_LIC2_true(){
+        Decide.NUMPOINTS = 5;
+        Decide.X = new double[] {0, -1, 0, 1, 0};
+        Decide.Y = new double[] {0, 1, 0, 1, 0};
+        Decide.PARAMETERS.EPSILON = (Math.PI/2) - 0.1; //PI - EPSILON ~ above 90 degrees
+        Assertions.assertTrue(Decide.LIC2());
+    }
+
+    @Test
+    public void test_LIC2_false(){
+        Decide.NUMPOINTS = 5;
+        Decide.X = new double[] {0, -1, 0, 1, 0};
+        Decide.Y = new double[] {0, 1, 0, 1, 0};
+        Decide.PARAMETERS.EPSILON = (Math.PI/2) + 0.1; //PI - EPSILON ~ below 90 degrees
+        Assertions.assertFalse(Decide.LIC2());
+    }
+
+    @Test
     public void test_LIC8_true() {
         Decide.X = new double[]{6, 3, 2, -1, 1};
         Decide.Y = new double[]{2, 4, 8, 7, 2};
