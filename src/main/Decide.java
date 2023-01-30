@@ -44,7 +44,10 @@ public class Decide {
         double sideSqrtC = 0;
 
         for(int i = 0; i < NUMPOINTS - 2; i++){
-            if(!(X[i] == X[i+1] && Y[i] == Y[i+1]) || (X[i] == X[i+2] && Y[i] == Y[i+2])){ //They don't coincide
+            if(!((X[i] == X[i+1] && Y[i] == Y[i+1]) //They don't coincide
+                    || (X[i] == X[i+2] && Y[i] == Y[i+2])
+                    || (X[i+1] == X[i+2] && Y[i+1] == Y[i+2]))){
+
                 //Form triangle and calculate sides
                 sideA = Math.pow(X[i+1] - X[i+2], 2) + Math.pow(Y[i+1] - Y[i+2], 2);
                 sideB = Math.pow(X[i] - X[i+2], 2) + Math.pow(Y[i] - Y[i+2], 2);
