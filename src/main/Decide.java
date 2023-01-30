@@ -144,15 +144,19 @@ public class Decide {
         for (int i = 0; i < NUMPOINTS - 2; i++) { //Loop through consecutive points
             triArea = ((X[i + 1] - X[i]) * (Y[i + 2] - Y[i]) - (X[i + 2] - X[i]) * (Y[i + 1] - Y[i])) / 2; //Shoelace formula
             triArea = Math.abs(triArea);
+
             if (PARAMETERS.AREA1 < triArea) {
 
-                return true;
+
+                if (PARAMETERS.AREA1 < triArea) {
+
+                    return true;
+                }
             }
         }
         return false;
     }
-
-
+    
     // There exists at least one set of Q PTS consecutive data points that lie in more than QUADS
     // quadrants. Where there is ambiguity as to which quadrant contains a given point, priority
     // of decision will be by quadrant number, i.e., I, II, III, IV. For example, the data point (0,0)
@@ -217,30 +221,30 @@ public class Decide {
     // points. If the first and last points of these N PTS are identical, then the calculated distance
     // to compare with DIST will be the distance from the coincident point to all other points of
     // the N PTS consecutive points. The condition is not met when NUMPOINTS < 3.
-    public static Boolean LIC6(){
+    public static Boolean LIC6() {
 
-        if(NUMPOINTS < 3) return false;
-        if(NUMPOINTS < PARAMETERS.N_PTS) return false;
+        if (NUMPOINTS < 3) return false;
+        if (NUMPOINTS < PARAMETERS.N_PTS) return false;
 
-        for(int i = 0; i <= NUMPOINTS-PARAMETERS.N_PTS; i++){
+        for (int i = 0; i <= NUMPOINTS - PARAMETERS.N_PTS; i++) {
 
-            for(int j = i + 1 ; j < i + PARAMETERS.N_PTS; j ++){
+            for (int j = i + 1; j < i + PARAMETERS.N_PTS; j++) {
 
                 //distance of first and last point
-                double dist = Math.sqrt((Math.pow(X[i + PARAMETERS.N_PTS-1],2)-Math.pow(X[i],2)) + (Math.pow(Y[i + PARAMETERS.N_PTS-1],2)-Math.pow(Y[i],2)));
+                double dist = Math.sqrt((Math.pow(X[i + PARAMETERS.N_PTS - 1], 2) - Math.pow(X[i], 2)) + (Math.pow(Y[i + PARAMETERS.N_PTS - 1], 2) - Math.pow(Y[i], 2)));
                 // special case if first and last N_PTS have identical coordinates
-                if(dist == 0){
+                if (dist == 0) {
                     // do special distance by calculating X[j]Y[j] distance from the first of these points
-                    double specialDistance = Math.sqrt((Math.pow(X[j],2)-Math.pow(X[i],2)) + (Math.pow(Y[j],2)-Math.pow(Y[i],2)));
+                    double specialDistance = Math.sqrt((Math.pow(X[j], 2) - Math.pow(X[i], 2)) + (Math.pow(Y[j], 2) - Math.pow(Y[i], 2)));
 
-                    if(specialDistance > 0) return true;
+                    if (specialDistance > 0) return true;
                 }
                 // standard distance from point X[j]Y[j] to the line
-                else{
+                else {
 
-                    double distanceFromDist = Math.abs(((X[i+PARAMETERS.N_PTS-1]-X[i])*(Y[i]-Y[j])) - (X[i]-X[j])*(Y[i+PARAMETERS.N_PTS-1]-Y[i]))/dist;
+                    double distanceFromDist = Math.abs(((X[i + PARAMETERS.N_PTS - 1] - X[i]) * (Y[i] - Y[j])) - (X[i] - X[j]) * (Y[i + PARAMETERS.N_PTS - 1] - Y[i])) / dist;
 
-                    if(distanceFromDist > dist)return true;
+                    if (distanceFromDist > dist) return true;
                 }
 
             }
@@ -399,5 +403,16 @@ public class Decide {
         }
         return false;
     }
+
+    // Launch Interceptor Condition 11. For further details, see documented requirements.
+    public static Boolean LIC11() {
+        for (int i = 0; i < NUMPOINTS - PARAMETERS.G_PTS - 1; i++) {
+            if (X[i + PARAMETERS.G_PTS + 1] - X[i] < 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 
