@@ -36,4 +36,17 @@ public class DecideTests {
         Decide.Y = new double[] {2, 5};
         Assertions.assertFalse(Decide.LIC0());
     }
+    @Test
+    public void test_LIC5_true(){
+        Decide.NUMPOINTS = 2;
+        Decide.X = new double[] {2, 1};
+        Assertions.assertTrue(Decide.LIC5());
+    }
+
+    @Test
+    public void test_LIC5_false(){
+        Decide.NUMPOINTS = 2;
+        Decide.X = new double[] {1, 2};
+        Assertions.assertFalse(Decide.LIC5());
+    }
 }
