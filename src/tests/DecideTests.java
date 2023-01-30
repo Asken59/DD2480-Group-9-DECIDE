@@ -2,7 +2,6 @@ package tests;
 
 import main.Decide;
 import main.Parameters_t;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -152,6 +151,36 @@ public class DecideTests {
         Decide.PARAMETERS.E_PTS = 2;
         Decide.PARAMETERS.F_PTS = 2;
         Assertions.assertFalse(Decide.LIC10());
+    }
+
+    @Test
+    public void test_LIC14_true() {
+        Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.E_PTS = 1;
+        Decide.PARAMETERS.F_PTS = 1;
+        Decide.X = new double[]{-1, 0, -2, -2, 1, 1};
+        Decide.Y = new double[]{4, -4, 2, 2, 4, 4};
+        Decide.PARAMETERS.AREA1 = 7;
+        Decide.PARAMETERS.AREA2 = 4;
+        Assertions.assertTrue(Decide.LIC14());
+    }
+
+    @Test
+    public void test_LIC14_false_1() {
+        Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.E_PTS = 1;
+        Decide.PARAMETERS.F_PTS = 1;
+        Decide.X = new double[]{-1, 0, -2, -2, 1, 1};
+        Decide.Y = new double[]{4, 1, 2, 2, 4, 4};
+        Decide.PARAMETERS.AREA1 = 4;
+        Decide.PARAMETERS.AREA2 = 4;
+        Assertions.assertFalse(Decide.LIC14());
+    }
+
+    @Test
+    public void test_LIC14_false_2() {
+        Decide.NUMPOINTS = 4;
+        Assertions.assertFalse(Decide.LIC14());
     }
 
 }
