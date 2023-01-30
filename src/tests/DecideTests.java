@@ -110,6 +110,20 @@ public class DecideTests {
     }
 
     @Test
+    public void test_LIC5_true() {
+        Decide.NUMPOINTS = 2;
+        Decide.X = new double[]{2, 1};
+        Assertions.assertTrue(Decide.LIC5());
+    }
+
+    @Test
+    public void test_LIC5_false() {
+        Decide.NUMPOINTS = 2;
+        Decide.X = new double[]{1, 2};
+        Assertions.assertFalse(Decide.LIC5());
+    }
+
+    @Test
     public void test_LIC7_true() {
         Decide.X = new double[]{1, 2, 1, 2, 5, 3};
         Decide.Y = new double[]{1, 1, 2, 2, 6, 2};
@@ -229,4 +243,5 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC10());
     }
 }
+
     

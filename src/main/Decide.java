@@ -44,6 +44,7 @@ public class Decide {
         }
         return false;
     }
+
     // Launch Interceptor Condition 1.
     public static Boolean LIC1() {
 
@@ -140,11 +141,15 @@ public class Decide {
             triArea = ((X[i+1] - X[i])*(Y[i+2] - Y[i]) - (X[i+2] - X[i])*(Y[i+1] - Y[i]))/2; //Shoelace formula
             triArea = Math.abs(triArea);
             if(PARAMETERS.AREA1 < triArea){
+
                 return true;
             }
         }
         return false;
     }
+
+
+
 
     // There exists at least one set of Q PTS consecutive data points that lie in more than QUADS
     // quadrants. Where there is ambiguity as to which quadrant contains a given point, priority
@@ -192,7 +197,18 @@ public class Decide {
         }
         return false;
     }
-    // Launch Interceptor Condition 7.
+    // There exists at least one set of two consecutive data points, (X[i],Y[i]) and (X[j],Y[j]), such
+    // that X[j] - X[i] < 0. (where i = j-1)
+    public static Boolean LIC5() {
+
+        for (int i = 0; i < NUMPOINTS - 1; i++) {
+
+            if ((X[i + 1] - X[i]) < 0) return true;
+
+        }
+        return false;
+    }
+                // Launch Interceptor Condition 7.
     public static Boolean LIC7() {
 
         // Check so that NUMBPOINTS is >= 3 as per specification, also checks that a set could possibly exist for the
@@ -346,3 +362,4 @@ public static Boolean LIC8() {
         return false;
     }
 }
+
