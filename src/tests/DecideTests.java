@@ -35,6 +35,7 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC0());
     }
 
+    @Test
     public void test_LIC1_true() {
         Decide.X = new double[]{1, 5, 1, 2, 3, 5};
         Decide.Y = new double[]{1, 1, 5, 3, 1, 4};
@@ -299,6 +300,36 @@ public class DecideTests {
         Decide.PARAMETERS.LENGTH1 = 1;
         Decide.PARAMETERS.LENGTH2 = 1;
         Assertions.assertFalse(Decide.LIC12());
+    }
+
+    @Test
+    public void test_LIC14_true() {
+        Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.E_PTS = 1;
+        Decide.PARAMETERS.F_PTS = 1;
+        Decide.X = new double[]{-1, 0, -2, -2, 1, 1};
+        Decide.Y = new double[]{4, -4, 2, 2, 4, 4};
+        Decide.PARAMETERS.AREA1 = 7;
+        Decide.PARAMETERS.AREA2 = 4;
+        Assertions.assertTrue(Decide.LIC14());
+    }
+
+    @Test
+    public void test_LIC14_false_1() {
+        Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.E_PTS = 1;
+        Decide.PARAMETERS.F_PTS = 1;
+        Decide.X = new double[]{-1, 0, -2, -2, 1, 1};
+        Decide.Y = new double[]{4, 1, 2, 2, 4, 4};
+        Decide.PARAMETERS.AREA1 = 4;
+        Decide.PARAMETERS.AREA2 = 4;
+        Assertions.assertFalse(Decide.LIC14());
+    }
+
+    @Test
+    public void test_LIC14_false_2() {
+        Decide.NUMPOINTS = 4;
+        Assertions.assertFalse(Decide.LIC14());
     }
 }
 
