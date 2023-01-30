@@ -55,6 +55,7 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC1());
     }
 
+    @Test
     public void test_LIC9_true(){
         // First, third and fifth points form an equilateral triangle. All angles are PI/3 radians (60 degrees).
         Decide.NUMPOINTS = 5;
