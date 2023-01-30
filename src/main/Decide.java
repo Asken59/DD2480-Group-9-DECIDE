@@ -141,12 +141,12 @@ public class Decide {
             triArea = ((X[i+1] - X[i])*(Y[i+2] - Y[i]) - (X[i+2] - X[i])*(Y[i+1] - Y[i]))/2; //Shoelace formula
             triArea = Math.abs(triArea);
             if(PARAMETERS.AREA1 < triArea){
-
                 return true;
             }
         }
         return false;
     }
+
 
 
 
@@ -361,5 +361,14 @@ public static Boolean LIC8() {
         }
         return false;
     }
-}
+    // Launch Interceptor Condition 11. For further details, see documented requirements.
+    public static Boolean LIC11(){
+        for(int i = 0; i  < NUMPOINTS - PARAMETERS.G_PTS - 1; i++){
+                    if(X[i + PARAMETERS.G_PTS + 1] - X[i] < 0){
+                        return true;
+                    }
+        }
+        return false;
+    }
 
+}
