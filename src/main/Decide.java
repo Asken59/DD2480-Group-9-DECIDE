@@ -297,4 +297,33 @@ public static Boolean LIC8() {
         }
         return false;
     }
+
+    // Launch Interceptor Condition 12.
+    public static Boolean LIC12() {
+
+        // Check so that NUMBPOINTS is >= 3 as per specification, also checks that a set could possibly exist for the
+        // given K_PTS parameter value
+        if (NUMPOINTS >= 3 && NUMPOINTS >= (PARAMETERS.K_PTS + 2)) {
+            boolean greaterThen = false;
+            boolean lessThen = false;
+
+            for (int i = 0; i < (NUMPOINTS - PARAMETERS.K_PTS - 1); i++) {
+
+                // Calculate distance between points
+                double distance = Math.sqrt(Math.pow((X[i] - X[i + PARAMETERS.K_PTS + 1]), 2) + Math.pow((Y[i] - Y[i + PARAMETERS.K_PTS +1]), 2));
+
+                // Check greater
+                if (distance > PARAMETERS.LENGTH1) greaterThen = true;
+            
+                // Check lesser
+                if (distance < PARAMETERS.LENGTH2) lessThen = true;
+
+                // If both are true then the condition is met
+                if (lessThen && greaterThen) return true;
+
+            }
+        }
+        
+        return false;
+    }
 }
