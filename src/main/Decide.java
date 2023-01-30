@@ -235,4 +235,45 @@ public class Decide {
         return false;
     }
 
+    // Launch Interceptor Condition 14. For further details, see documented requirements.
+    public static Boolean LIC14() {
+
+        boolean largeArea = false;
+        boolean smallArea = false;
+
+        // Conditions which should be met
+        if (NUMPOINTS < 5 || PARAMETERS.AREA2 < 2) {
+            return false;
+        }
+
+        // Looping through data points
+        for (int i=0; i < NUMPOINTS-PARAMETERS.E_PTS-PARAMETERS.F_PTS-2; i++) {
+
+            // Second point, preceded by E_PTS consecutive points
+            int j = i + PARAMETERS.E_PTS + 1;
+
+            // Third point, preceded by F_PTS consecutive points
+            int k = j + PARAMETERS.F_PTS + 1;
+
+            // Calculates area between the three points
+            double area = 0.5 * Math.abs((X[i]*(Y[j] - Y[k])) + (X[j]*(Y[k] - Y[i])) + (X[k]*(Y[i] - Y[j])));
+
+            // Evaluate area conditions
+            if (area > PARAMETERS.AREA1) {
+                largeArea = true;
+            }
+
+            if (area < PARAMETERS.AREA2) {
+                smallArea = true;
+            }
+
+            // Check if both conditions are met
+            if (largeArea && smallArea) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
