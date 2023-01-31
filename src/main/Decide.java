@@ -88,6 +88,7 @@ public class Decide {
 
     public static void generateFUV() {
         FUV = new Boolean[15];
+
         for (int i = 0; i < 15; i++) {
             if (!PUV[i]) FUV[i] = true; 
             else {
