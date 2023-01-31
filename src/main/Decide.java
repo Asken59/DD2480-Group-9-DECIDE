@@ -27,9 +27,11 @@ public class Decide {
     public static Boolean LAUNCH;
 
     public static void DECIDE() {
-        //TODO: Evaluate LICS and generate the CMV
+        // Evaluate LICS and generate the CMV
+        CMV();
         //Generate the PUM using the CMV and LCM
         generatePUM();
+        //TODO: Generate the PUM using the CMV and LCM
         //TODO: Generate the FUV using the PUM and PUV
         //TODO: Evaluate LAUNCH and print
     }
@@ -55,6 +57,28 @@ public class Decide {
         }
     }
 
+
+    public static void CMV() {
+
+        CMV = new Boolean[15];
+
+        CMV[0] = LIC0();
+        CMV[1] = LIC1();
+        CMV[2] = LIC2();
+        CMV[3] = LIC3();
+        CMV[4] = LIC4();
+        CMV[5] = LIC5();
+        CMV[6] = LIC6();
+        CMV[7] = LIC7();
+        CMV[8] = LIC8();
+        CMV[9] = LIC9();
+        CMV[10] = LIC10();
+        CMV[11] = LIC11();
+        CMV[12] = LIC12();
+        CMV[13] = LIC13();
+        CMV[14] = LIC14();
+
+    }
 
     // Launch Interceptor Condition 0. For further details, see documented requirements.
     public static Boolean LIC0() {
@@ -464,6 +488,81 @@ public class Decide {
         return false;
     }
 
+    // Launch Interceptor Condition 13.
+    public static Boolean LIC13() {
+
+        // Check so that NUMBPOINTS is >= 5 as per specification, also checks that a set could possibly exist for the
+        // given A_PTS and B_PTS parameter values
+        if (NUMPOINTS >= 5 && NUMPOINTS >= (PARAMETERS.A_PTS + PARAMETERS.B_PTS + 3)) {
+            boolean contain1 = false;
+            boolean contain2 = false;
+
+            // Loop through all possible sets
+            for (int i = 0; i < (NUMPOINTS - (PARAMETERS.A_PTS + PARAMETERS.B_PTS + 2)); i++) {
+
+                // Calculate the radius of the minimum enclosing circle for the set
+                // Two senarios, one for obtuse triangles and one for acute and right triangles
+
+                // The points in the set
+                double x1 = X[i];
+                double y1 = Y[i];
+                double x2 = X[i + PARAMETERS.A_PTS + 1];
+                double y2 = Y[i + PARAMETERS.A_PTS + 1];
+                double x3 = X[i + PARAMETERS.A_PTS + PARAMETERS.B_PTS + 2];
+                double y3 = Y[i + PARAMETERS.A_PTS + PARAMETERS.B_PTS + 2];
+
+                // Calculates distances between data points
+                double a = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+                double b = Math.sqrt(Math.pow((x1 - x3), 2) + Math.pow((y1 - y3), 2));
+                double c = Math.sqrt(Math.pow((x2 - x3), 2) + Math.pow((y2 - y3), 2));
+
+                // Calculates the largest distance
+                double maxDist= Math.max(Math.max(a, b), c);
+
+                // If the triangle is obruse then the obtruse angle will be oposite the largest distance
+                // Check if the angle opposite the largest distance is obtrues with the cosine rule (C = arccos((a^2 + b^2 - c^2) / 2ab))
+                boolean obtuse = false;
+                if (maxDist == a) {
+                    if (Math.toDegrees(Math.acos((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b))) > 90) {
+                        obtuse = true;
+                    }
+                } else if (maxDist == b) {
+                    if (Math.toDegrees(Math.acos((Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) / (2 * a * c))) > 90) {
+                        obtuse = true;
+                    }
+                } else if (maxDist == c) {
+                    if (Math.toDegrees(Math.acos((Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c))) > 90) {
+                        obtuse = true;
+                    }
+                }
+
+                // Calculate radius
+                double minRadius = 0;
+                if (obtuse) {
+                    // The minimum enclosing circle is the one where all points lie on the circumference
+                    double s = (a * b * c) / 2;
+                    minRadius = (a * b * c) / (4 * Math.sqrt(s * (s - a) * (s - b) * (s - c)));
+                } else {
+                    // The minimun radius is half of the max distance
+                    minRadius = maxDist/2;
+                }
+
+                // Check if set can not be contained within RADIUS1
+                if (minRadius > PARAMETERS.RADIUS1) contain1 = true;
+
+                // Check if set can be contained within or on RADIUS2
+                if (minRadius <= PARAMETERS.RADIUS2) contain2 = true;
+            }
+
+
+            // If both are true then the contiditon is satisfied
+            if (contain1 && contain2) return true;
+
+        }
+
+        return false;
+    }
+
     // Launch Interceptor Condition 14. For further details, see documented requirements.
     public static Boolean LIC14() {
 
@@ -504,5 +603,4 @@ public class Decide {
 
         return false;
     }
-
 }
