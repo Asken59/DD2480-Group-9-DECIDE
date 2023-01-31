@@ -32,6 +32,28 @@ public class Decide {
         //TODO: Generate the FUV using the PUM and PUV
         //TODO: Evaluate LAUNCH and print
     }
+    
+    public static void generatePUM() {
+        // PUM is a 15 x 15 matrix
+        PUM = new Boolean[15][15];
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                switch (LCM[i][j]) {
+                    case NOTUSED:
+                        PUM[i][j] = true;
+                        break;
+                    case ORR:
+                        PUM[i][j] = (CMV[i] || CMV[j]) ? true: false;
+                        break;
+                    case ANDD:
+                        PUM[i][j] = (CMV[i] && CMV[j]) ? true: false;
+                        break;
+                }
+            }
+        }
+    }
+
 
     // Launch Interceptor Condition 0. For further details, see documented requirements.
     public static Boolean LIC0() {
