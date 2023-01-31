@@ -29,9 +29,36 @@ public class Decide {
     public static void DECIDE() {
         //TODO: Evaluate LICS and generate the CMV
         //TODO: Generate the PUM using the CMV and LCM
-        //TODO: Generate the FUV using the PUM and PUV
-        //TODO: Evaluate LAUNCH and print
+        //Generate the FUV using the PUM and PUV
+        generateFUV();
+
+        //Evaluate LAUNCH and print
+        evaluateFUV();
+        
+        if (LAUNCH) System.out.println("YES");
+        else System.out.println("NO");
     }
+
+    public static void generateFUV() {
+        for (int i = 0; i < 15; i++) {
+            if (!PUV[i]) FUV[i] = true; 
+            else {
+                boolean row = true;
+                for (int j = 0; j < 15; j++) {
+                    if (!PUM[i][j]) row = false;
+                }
+                FUV[i] = row;
+            }
+        }
+
+    }
+
+    public static void evaluateFUV() {
+        LAUNCH = true;
+        for (Boolean b: FUV)
+            if (!b) LAUNCH = false;
+    }
+
 
     // Launch Interceptor Condition 0. For further details, see documented requirements.
     public static Boolean LIC0() {
