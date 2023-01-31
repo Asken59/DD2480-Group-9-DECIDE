@@ -107,6 +107,9 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC3());
     }
 
+    // LIC4 test true evaluation NUMPOINTS, QUADS, and_PTS all fulfill the requirements for a true evaluation of the test
+    // The chosen test circle has points in each of the 4 quadrants, and the last two points are the same
+    // The X, and Y doubles all each represent one point each
     @Test
     public void test_LIC4_true() {
         Decide.NUMPOINTS = 5;
@@ -116,7 +119,9 @@ public class DecideTests {
         Decide.Y = new double[]{0, -1, -2, 1, 0};
         Assertions.assertTrue(Decide.LIC4());
     }
-
+    // LIC4 test false evaluation NUMPOINTS, QUADS, and_PTS all fulfill the requirements for a true evaluation of the test
+    // The chosen test circle has 5 equal points in the same quadrant
+    // The X, and Y doubles all each represent one point each
     @Test
     public void test_LIC4_false() {
         Decide.NUMPOINTS = 5;
@@ -126,21 +131,28 @@ public class DecideTests {
         Decide.Y = new double[]{0, 0, 0, 0, 0};
         Assertions.assertFalse(Decide.LIC4());
     }
-
+    // LIC5 test true evaluation NUMPOINTS, and the X coordinates all fulfill the requirements for a true evaluation
+    // The chosen X values are two separate points where the first coordinate has a higher value than the second
+    // The X doubles all each represent one X value each
     @Test
     public void test_LIC5_true() {
         Decide.NUMPOINTS = 2;
         Decide.X = new double[]{2, 1};
         Assertions.assertTrue(Decide.LIC5());
     }
-
+    // LIC5 test true evaluation NUMPOINTS, and the X coordinates all fulfill the requirements for a false evaluation
+    // The chosen X values are two separate points where the first coordinate has a lower value than the second
+    // The X doubles all each represent one X value each
     @Test
     public void test_LIC5_false() {
         Decide.NUMPOINTS = 2;
         Decide.X = new double[]{1, 2};
         Assertions.assertFalse(Decide.LIC5());
     }
-
+    // LIC6 test true evaluation NUMPOINTS, PARAMETERS.N_PTS, the X, and Y coordinates all fulfill the requirements for a true evaluation
+    // The chosen X, and Y values are points with different values where the second consecutive point is further away from the line created
+    // by the first and last of the consecutive N_PTS
+    // The X,Y doubles all each represent one point coordinate each
     @Test
     public void test_LIC6_true(){
         Decide.NUMPOINTS = 4;
@@ -149,7 +161,10 @@ public class DecideTests {
         Decide.Y = new double[] {0, -6, 0,1};
         Assertions.assertTrue(Decide.LIC6());
     }
-
+    // LIC6 test false evaluation NUMPOINTS, PARAMETERS.N_PTS, the X, and Y coordinates all fulfill the requirements for a false evaluation
+    // The chosen X, and Y values are points with different values where the second consecutive point is not further away from the line created
+    // by the first and last of the consecutive N_PTS, Furthermore the N_PTS are equal to the NUMPOINTS which will cause a false evaluation
+    // The X,Y doubles all each represent one point coordinate each
     @Test
     public void test_LIC6_false() {
         Decide.NUMPOINTS = 3;
