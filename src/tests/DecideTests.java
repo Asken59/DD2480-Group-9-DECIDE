@@ -140,7 +140,7 @@ public class DecideTests {
         Decide.X = new double[]{2, 1};
         Assertions.assertTrue(Decide.LIC5());
     }
-    // LIC5 test true evaluation NUMPOINTS, and the X coordinates all fulfill the requirements for a false evaluation
+    // LIC5 test false evaluation NUMPOINTS, and the X coordinates all fulfill the requirements for a false evaluation
     // The chosen X values are two separate points where the first coordinate has a lower value than the second
     // The X doubles all each represent one X value each
     @Test
