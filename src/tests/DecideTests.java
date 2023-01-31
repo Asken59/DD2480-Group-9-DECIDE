@@ -253,6 +253,14 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC9());
     }
 
+    // LIC10: Test whether the condition evaluates to false when passed invalid input.
+    //
+    // The condition cannot be met if the number of consecutive intervening points (C_PTS+D_PTS)
+    // spare less than 3 points for the triangle (C_PTS+D_PTS > NUMPOINTS-3).
+    // We set the parameter NUMPOINTS to 5 (valid) and both C_PTS and D_PTS to 4 so that the
+    // condition should evaluate to false.
+    //
+    // Expected output: false
     @Test
     public void test_LIC9_false_4(){
         Decide.NUMPOINTS = 5;
