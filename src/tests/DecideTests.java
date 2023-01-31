@@ -87,6 +87,11 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC1());
     }
 
+    // LIC2 Positive test
+    // The parameters NUMPOINTS, X, and Y are set up to form an angle of PI/2 radians at (-1,1) (0,0) (1,1)
+    // EPSILON is set to slightly less than (PI/2) radians
+    // This should result in the angle < PI - EPSILON
+    // Expected method from method call: true
     @Test
     public void test_LIC2_true() {
         Decide.NUMPOINTS = 5;
@@ -96,6 +101,11 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC2());
     }
 
+    // LIC2 Negative test
+    // The parameters NUMPOINTS, X, and Y are set up to form an angle of PI/2 radians at (-1,1) (0,0) (1,1)
+    // EPSILON is set to slightly more than (PI/2) radians
+    // This should result in the angle > PI - EPSILON
+    // Expected method from method call: false
     @Test
     public void test_LIC2_false() {
         Decide.NUMPOINTS = 5;
@@ -105,6 +115,11 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC2());
     }
 
+    // LIC3 Positive test
+    // The parameters NUMPOINTS, X, and Y are set up to form a triangle at (0,0) (4,0) (4,4) with area 8
+    // AREA1 is set to slightly less than 8
+    // This should result in the area > AREA1
+    // Expected method from method call: true
     @Test
     public void test_LIC3_true() {
         Decide.NUMPOINTS = 5;
@@ -114,6 +129,11 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC3());
     }
 
+    // LIC3 Negative test
+    // The parameters NUMPOINTS, X, and Y are set up to form a triangle at (0,0) (4,0) (4,4) with area 8
+    // AREA1 is set to slightly more than 8
+    // This should result in the area > AREA1
+    // Expected method from method call: false
     @Test
     public void test_LIC3_false() {
         Decide.NUMPOINTS = 5;
@@ -413,6 +433,11 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC10());
     }
 
+    // LIC11 Positive test
+    // The parameters NUMPOINTS, X, and Y are set up so that X[1] > X[3]
+    // G_PTS is set to 2 so that X[1] and X[3] is the correct distance
+    // This should result in the requirement being fulfilled
+    // Expected method from method call: true
     @Test
     public void test_LIC11_true() {
         Decide.NUMPOINTS = 5;
@@ -422,6 +447,11 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC11());
     }
 
+    // LIC11 Negative test
+    // The parameters NUMPOINTS, X, and Y are set up so that X[1] > X[2]
+    // G_PTS is set to 2 so that X[1] and X[2] is not the correct distance
+    // This should result in the requirement not being fulfilled
+    // Expected method from method call: false
     @Test
     public void test_LIC11_false() {
         Decide.NUMPOINTS = 5;
