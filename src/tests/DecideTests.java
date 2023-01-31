@@ -4,6 +4,7 @@ import main.Decide;
 import main.Parameters_t;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class DecideTests {
@@ -15,6 +16,23 @@ public class DecideTests {
                 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0
         );
+    }
+
+    @Test 
+    public void test_generatePUM() {
+        Decide.CMV = new Boolean[]{true, true, false, true, true, true, true, true, true, true, true, true, true, true, true}; 
+        Decide.LCM = new Decide.Connectors[15][15];
+        for (int i = 0; i < 15; i++) {
+             for (int j = 0; j < 15; j++) {
+                 Decide.LCM[i][j] = Decide.Connectors.NOTUSED;
+             }
+        }
+        Decide.LCM[0][2] = Decide.Connectors.ORR;
+        Decide.LCM[1][2] = Decide.Connectors.ANDD;
+        Decide.generatePUM();
+        Assertions.assertTrue(Decide.PUM[0][2]);
+        Assertions.assertTrue(Decide.PUM[11][3]);
+        Assertions.assertFalse(Decide.PUM[1][2]);
     }
 
     @Test
@@ -259,7 +277,6 @@ public class DecideTests {
         Decide.PARAMETERS.E_PTS = 2;
         Decide.PARAMETERS.F_PTS = 2;
         Assertions.assertFalse(Decide.LIC10());
-
     }
 
     @Test
@@ -279,7 +296,7 @@ public class DecideTests {
         Decide.Y = new double[]{2, 5, 1, 1, 1};
         Assertions.assertFalse(Decide.LIC11());
     }
-    
+
     @Test
     public void test_LIC12_true(){
         Decide.X = new double[] {1, 2, 1, 2, 5, 3};
@@ -300,6 +317,30 @@ public class DecideTests {
         Decide.PARAMETERS.LENGTH1 = 1;
         Decide.PARAMETERS.LENGTH2 = 1;
         Assertions.assertFalse(Decide.LIC12());
+    }
+
+    @Test
+    public void test_LIC13_true() {
+        Decide.X = new double[]{1, 5, 1, 2, 3, 5};
+        Decide.Y = new double[]{1, 1, 5, 3, 1, 4};
+        Decide.PARAMETERS.A_PTS = 1;
+        Decide.PARAMETERS.B_PTS = 1;
+        Decide.PARAMETERS.RADIUS1 = 2;
+        Decide.PARAMETERS.RADIUS2 = 8;
+        Decide.NUMPOINTS = 6;
+        Assertions.assertTrue(Decide.LIC13());
+    }
+
+    @Test
+    public void test_LIC13_false() {
+        Decide.X = new double[]{1, 2, 1, 2, 1, 3};
+        Decide.Y = new double[]{1, 1, 2, 2, 3, 2};
+        Decide.PARAMETERS.A_PTS = 1;
+        Decide.PARAMETERS.B_PTS = 1;
+        Decide.PARAMETERS.RADIUS1 = 8;
+        Decide.PARAMETERS.RADIUS2 = 1;
+        Decide.NUMPOINTS = 6;
+        Assertions.assertFalse(Decide.LIC13());
     }
 
     @Test
