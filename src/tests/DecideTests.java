@@ -18,14 +18,14 @@ public class DecideTests {
         );
     }
 
-    @Test 
+    @Test
     public void test_generatePUM() {
-        Decide.CMV = new Boolean[]{true, true, false, true, true, true, true, true, true, true, true, true, true, true, true}; 
+        Decide.CMV = new Boolean[]{true, true, false, true, true, true, true, true, true, true, true, true, true, true, true};
         Decide.LCM = new Decide.Connectors[15][15];
         for (int i = 0; i < 15; i++) {
-             for (int j = 0; j < 15; j++) {
-                 Decide.LCM[i][j] = Decide.Connectors.NOTUSED;
-             }
+            for (int j = 0; j < 15; j++) {
+                Decide.LCM[i][j] = Decide.Connectors.NOTUSED;
+            }
         }
         Decide.LCM[0][2] = Decide.Connectors.ORR;
         Decide.LCM[1][2] = Decide.Connectors.ANDD;
@@ -107,9 +107,14 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC3());
     }
 
-    // LIC4 test true evaluation NUMPOINTS, QUADS, and_PTS all fulfill the requirements for a true evaluation of the test
-    // The chosen test circle has points in each of the 4 quadrants, and the last two points are the same
-    // The X, and Y doubles all each represent one point each
+    /*
+       LIC4 positive test
+       The parameters are NUMPOINTS, QUADS, Q_PTS, X, and Y
+       NUMPOINTS are the number of points tested. QUADS are the number of QUAD quadrant that need to be less than
+       the number of consecutive points in distinct quadrants. The X, and Y represent coordinates for each of the NUMPOINTS points.
+       The test contains four points in five different quadrants, and the number of QUADS is 1, the Q_PTS is set to 3.
+       Expected result true
+    */
     @Test
     public void test_LIC4_true() {
         Decide.NUMPOINTS = 5;
@@ -119,9 +124,15 @@ public class DecideTests {
         Decide.Y = new double[]{0, -1, -2, 1, 0};
         Assertions.assertTrue(Decide.LIC4());
     }
-    // LIC4 test false evaluation NUMPOINTS, QUADS, and_PTS all fulfill the requirements for a true evaluation of the test
-    // The chosen test circle has 5 equal points in the same quadrant
-    // The X, and Y doubles all each represent one point each
+
+    /*
+       LIC4 negative test
+       The parameters are NUMPOINTS, QUADS, Q_PTS, X, and Y
+       NUMPOINTS are the number of points tested. QUADS are the number of QUAD quadrant that need to be less than
+       the number of consecutive points in distinct quadrants. The X, and Y represent coordinates for each of the NUMPOINTS points
+       The test contains five identical points, and the number of QUADS is 1, the Q_PTS is set to 1.
+       Expected result false
+     */
     @Test
     public void test_LIC4_false() {
         Decide.NUMPOINTS = 5;
@@ -131,40 +142,59 @@ public class DecideTests {
         Decide.Y = new double[]{0, 0, 0, 0, 0};
         Assertions.assertFalse(Decide.LIC4());
     }
-    // LIC5 test true evaluation NUMPOINTS, and the X coordinates all fulfill the requirements for a true evaluation
-    // The chosen X values are two separate points where the first coordinate has a higher value than the second
-    // The X doubles all each represent one X value each
+
+    /*
+       LIC5 positive test
+       The Parameters are NUMPOINTS, and X
+       NUMPOINTS are the number of points tested, and X represent the X coordinates for each of the NUMPOINTS points.
+       The test contains two different points where the first is greater than the second.
+       Expected result true
+     */
     @Test
     public void test_LIC5_true() {
         Decide.NUMPOINTS = 2;
         Decide.X = new double[]{2, 1};
         Assertions.assertTrue(Decide.LIC5());
     }
-    // LIC5 test false evaluation NUMPOINTS, and the X coordinates all fulfill the requirements for a false evaluation
-    // The chosen X values are two separate points where the first coordinate has a lower value than the second
-    // The X doubles all each represent one X value each
+
+    /*
+        LIC5 negative test
+        The Parameters are NUMPOINTS, and X
+        NUMPOINTS are the number of points tested, and X represent the X coordinates for each of the NUMPOINTS points.
+        The test contains two different points where the second is greater than the first.
+        Expected result false
+     */
     @Test
     public void test_LIC5_false() {
         Decide.NUMPOINTS = 2;
         Decide.X = new double[]{1, 2};
         Assertions.assertFalse(Decide.LIC5());
     }
-    // LIC6 test true evaluation NUMPOINTS, PARAMETERS.N_PTS, the X, and Y coordinates all fulfill the requirements for a true evaluation
-    // The chosen X, and Y values are points with different values where the second consecutive point is further away from the line created
-    // by the first and last of the consecutive N_PTS
-    // The X,Y doubles all each represent one point coordinate each
+    /*
+        LIC6 positive test
+        The Parameters are NUMPOINTS, N_PTS, X, and Y
+        NUMPOINTS are the number of points tested, N_PTS are the number of consecutive poitns tested and X represent the X coordinates for each of the NUMPOINTS points.
+        The test contains four different points where there are at least N_PTS consecutive points where the line distance of the first
+        and last of these is lesser than the distance of at least one of the points to this between these two points
+        Expected result true
+     */
     @Test
-    public void test_LIC6_true(){
+    public void test_LIC6_true() {
         Decide.NUMPOINTS = 4;
         Decide.PARAMETERS.N_PTS = 3;
-        Decide.X = new double[] {0, 3, 0,1};
-        Decide.Y = new double[] {0, -6, 0,1};
+        Decide.X = new double[]{0, 3, 0, 1};
+        Decide.Y = new double[]{0, -6, 0, 1};
         Assertions.assertTrue(Decide.LIC6());
     }
-    // LIC6 test false evaluation NUMPOINTS, PARAMETERS.N_PTS, the X, and Y coordinates all fulfill the requirements for a false evaluation
-    // The chosen X, and Y values are points with different values where the second consecutive point is not further away from the line created
-    // by the first and last of the consecutive N_PTS, Furthermore the N_PTS are equal to the NUMPOINTS which will cause a false evaluation
-    // The X,Y doubles all each represent one point coordinate each
+    /*
+        LIC6 negative test
+        The Parameters are NUMPOINTS, N_PTS, X, and Y
+        NUMPOINTS are the number of points tested, N_PTS are the number of consecutive poitns tested and X represent the X coordinates for each of the NUMPOINTS points.
+        The test contains three different points where there are at least N_PTS consecutive points where the line distance of the first
+        and last of these is not lesser than the distance of at least one of the points to this between these two points.
+        Furthermore the NUMPOINTS is not greater than the N_PTS
+        Expected result false
+     */
     @Test
     public void test_LIC6_false() {
         Decide.NUMPOINTS = 3;
@@ -305,11 +335,11 @@ public class DecideTests {
     }
 
     @Test
-    public void test_LIC11_true(){
+    public void test_LIC11_true() {
         Decide.NUMPOINTS = 5;
         Decide.PARAMETERS.G_PTS = 2;
-        Decide.X = new double[] {1, 3, 3, 3, 2};
-        Decide.Y = new double[] {2, 5, 1, 1, 1};
+        Decide.X = new double[]{1, 3, 3, 3, 2};
+        Decide.Y = new double[]{2, 5, 1, 1, 1};
         Assertions.assertTrue(Decide.LIC11());
     }
 
@@ -328,9 +358,9 @@ public class DecideTests {
     // According to the requirements specification this should make the condition evaluate to true.
     // Excepted result from method call: true
     @Test
-    public void test_LIC12_true(){
-        Decide.X = new double[] {1, 2, 1, 2, 5, 3};
-        Decide.Y = new double[] {1, 1, 2, 2, 6, 2};
+    public void test_LIC12_true() {
+        Decide.X = new double[]{1, 2, 1, 2, 5, 3};
+        Decide.Y = new double[]{1, 1, 2, 2, 6, 2};
         Decide.NUMPOINTS = 6;
         Decide.PARAMETERS.K_PTS = 3;
         Decide.PARAMETERS.LENGTH1 = 4;
@@ -344,9 +374,9 @@ public class DecideTests {
     // According to the requirements specification this should make the condition evaluate to false.
     // Excepted result from method call: false
     @Test
-    public void test_LIC12_false(){
-        Decide.X = new double[] {1, 2, 1, 2, 2, 3};
-        Decide.Y = new double[] {1, 1, 2, 2, 2, 2};
+    public void test_LIC12_false() {
+        Decide.X = new double[]{1, 2, 1, 2, 2, 3};
+        Decide.Y = new double[]{1, 1, 2, 2, 2, 2};
         Decide.NUMPOINTS = 6;
         Decide.PARAMETERS.K_PTS = 3;
         Decide.PARAMETERS.LENGTH1 = 1;
