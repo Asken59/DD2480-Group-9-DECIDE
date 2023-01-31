@@ -27,12 +27,36 @@ public class Decide {
     public static Boolean LAUNCH;
 
     public static void DECIDE() {
-        //TODO: Evaluate LICS and generate the CMV
+        // Evaluate LICS and generate the CMV
         CMV();
+        //Generate the PUM using the CMV and LCM
+        generatePUM();
         //TODO: Generate the PUM using the CMV and LCM
         //TODO: Generate the FUV using the PUM and PUV
         //TODO: Evaluate LAUNCH and print
     }
+    
+    public static void generatePUM() {
+        // PUM is a 15 x 15 matrix
+        PUM = new Boolean[15][15];
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                switch (LCM[i][j]) {
+                    case NOTUSED:
+                        PUM[i][j] = true;
+                        break;
+                    case ORR:
+                        PUM[i][j] = (CMV[i] || CMV[j]) ? true: false;
+                        break;
+                    case ANDD:
+                        PUM[i][j] = (CMV[i] && CMV[j]) ? true: false;
+                        break;
+                }
+            }
+        }
+    }
+
 
     public static void CMV() {
 
