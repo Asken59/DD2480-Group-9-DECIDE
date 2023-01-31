@@ -18,6 +18,11 @@ public class DecideTests {
         );
     }
 
+    // All LICs: Test whether each LIC evaluates to false when there are no data points.
+    //
+    // We set the NUMPOINTS variable to 0 and initialize X and Y to empty arrays.
+    //
+    // Expected output: false
     @Test
     public void test_all_LICs_no_points_false(){
         Decide.NUMPOINTS = 0;
