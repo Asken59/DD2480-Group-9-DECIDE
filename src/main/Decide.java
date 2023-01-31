@@ -29,11 +29,39 @@ public class Decide {
     public static void DECIDE() {
         // Evaluate LICS and generate the CMV
         CMV();
+
         //Generate the PUM using the CMV and LCM
         generatePUM();
-        //TODO: Generate the PUM using the CMV and LCM
-        //TODO: Generate the FUV using the PUM and PUV
-        //TODO: Evaluate LAUNCH and print
+
+        //Generate the FUV using the PUM and PUV
+        generateFUV();
+
+        //Evaluate LAUNCH and print
+        evaluateFUV();
+        
+        if (LAUNCH) System.out.println("YES");
+        else System.out.println("NO");
+    }
+
+    public static void CMV() {
+
+        CMV = new Boolean[15];
+
+        CMV[0] = LIC0();
+        CMV[1] = LIC1();
+        CMV[2] = LIC2();
+        CMV[3] = LIC3();
+        CMV[4] = LIC4();
+        CMV[5] = LIC5();
+        CMV[6] = LIC6();
+        CMV[7] = LIC7();
+        CMV[8] = LIC8();
+        CMV[9] = LIC9();
+        CMV[10] = LIC10();
+        CMV[11] = LIC11();
+        CMV[12] = LIC12();
+        CMV[13] = LIC13();
+        CMV[14] = LIC14();
     }
     
     public static void generatePUM() {
@@ -57,7 +85,6 @@ public class Decide {
         }
     }
 
-
     public static void CMV() {
 
         CMV = new Boolean[15];
@@ -79,6 +106,27 @@ public class Decide {
         CMV[14] = LIC14();
 
     }
+
+    public static void generateFUV() {
+        for (int i = 0; i < 15; i++) {
+            if (!PUV[i]) FUV[i] = true; 
+            else {
+                boolean row = true;
+                for (int j = 0; j < 15; j++) {
+                    if (!PUM[i][j]) row = false;
+                }
+                FUV[i] = row;
+            }
+        }
+
+    }
+
+    public static void evaluateFUV() {
+        LAUNCH = true;
+        for (Boolean b: FUV)
+            if (!b) LAUNCH = false;
+    }
+
 
     // Launch Interceptor Condition 0. For further details, see documented requirements.
     public static Boolean LIC0() {
