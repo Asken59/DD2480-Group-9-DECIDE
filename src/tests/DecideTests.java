@@ -207,8 +207,8 @@ public class DecideTests {
     // LIC 7 positive test
     // Sets two points to values that result in the distance between a set of them separated by
     // exact K_PTS consecutive points being greater than LENGTH1.
-    // According to the requirements specification this should make the condition evaluate to false.
-    // Excepted result from method call: false
+    // According to the requirements specification this should make the condition evaluate to true.
+    // Excepted result from method call: true 
     @Test
     public void test_LIC7_true() {
         Decide.X = new double[]{1, 2, 1, 2, 5, 3};
@@ -401,7 +401,7 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC13());
     }
 
-    // LIC 13 false test
+    // LIC 13 negative test
     // Sets three points to values separated by exact A_PTS and B_PTS that result in them not being
     // contained in a circle of radius RADIUS1 while also not being contained in a circle of radius RADIUS2.
     // According to the requirements specification this should make the condition evaluate to false.
