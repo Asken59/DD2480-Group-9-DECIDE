@@ -28,7 +28,8 @@ public class Decide {
 
     public static void DECIDE() {
         //TODO: Evaluate LICS and generate the CMV
-        //TODO: Generate the PUM using the CMV and LCM
+        //Generate the PUM using the CMV and LCM
+        generatePUM();
         //TODO: Generate the FUV using the PUM and PUV
         //TODO: Evaluate LAUNCH and print
     }
