@@ -19,4 +19,7 @@ It is also possible to compile and run them normally through the JVM, just compi
 
 ## Contributions
 Each person wrote three different LICs, including implementation and tests. 
-For merging and merge conflict resolutions it was done on one a case to case basis either individually or in a smaller group, sort of as a ad-hoc pair programming style.
+Merging and merge conflict resolutions were done on one a case to case basis either individually or in a smaller group, sort of as a ad-hoc pair programming style.
+The rest of the work, like writing this README, updating comments or adding missing functionality was also done ad-hoc individually by the commiter or in a group as a sort of over the shoulder work style.
+
+All pull requests were reviewed by at least one other member in the group, often someone that happened to be available at the time.
