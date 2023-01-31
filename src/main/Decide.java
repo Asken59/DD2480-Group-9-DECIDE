@@ -3,9 +3,7 @@ package main;
 import java.util.Arrays;
 
 public class Decide {
-    public enum Connectors {NOTUSED, ORR, ANDD}
-
-    ;
+    public enum Connectors {NOTUSED, ORR, ANDD};
 
     //All "global" variables
     public static Parameters_t PARAMETERS;
@@ -414,6 +412,35 @@ public class Decide {
         return false;
     }
 
+    // Launch Interceptor Condition 12.
+    public static Boolean LIC12() {
+
+        // Check so that NUMBPOINTS is >= 3 as per specification, also checks that a set could possibly exist for the
+        // given K_PTS parameter value
+        if (NUMPOINTS >= 3 && NUMPOINTS >= (PARAMETERS.K_PTS + 2)) {
+            boolean greaterThen = false;
+            boolean lessThen = false;
+
+            for (int i = 0; i < (NUMPOINTS - PARAMETERS.K_PTS - 1); i++) {
+
+                // Calculate distance between points
+                double distance = Math.sqrt(Math.pow((X[i] - X[i + PARAMETERS.K_PTS + 1]), 2) + Math.pow((Y[i] - Y[i + PARAMETERS.K_PTS +1]), 2));
+
+                // Check greater
+                if (distance > PARAMETERS.LENGTH1) greaterThen = true;
+
+                // Check lesser
+                if (distance < PARAMETERS.LENGTH2) lessThen = true;
+
+                // If both are true then the condition is met
+                if (lessThen && greaterThen) return true;
+
+            }
+        }
+
+        return false;
+    }
+
     // Launch Interceptor Condition 13.
     public static Boolean LIC13() {
 
@@ -489,5 +516,44 @@ public class Decide {
         return false;
     }
 
-}
+    // Launch Interceptor Condition 14. For further details, see documented requirements.
+    public static Boolean LIC14() {
 
+        boolean largeArea = false;
+        boolean smallArea = false;
+
+        // Conditions which should be met
+        if (NUMPOINTS < 5 || PARAMETERS.AREA2 < 2) {
+            return false;
+        }
+
+        // Looping through data points
+        for (int i=0; i < NUMPOINTS-PARAMETERS.E_PTS-PARAMETERS.F_PTS-2; i++) {
+
+            // Second point, preceded by E_PTS consecutive points
+            int j = i + PARAMETERS.E_PTS + 1;
+
+            // Third point, preceded by F_PTS consecutive points
+            int k = j + PARAMETERS.F_PTS + 1;
+
+            // Calculates area between the three points
+            double area = 0.5 * Math.abs((X[i]*(Y[j] - Y[k])) + (X[j]*(Y[k] - Y[i])) + (X[k]*(Y[i] - Y[j])));
+
+            // Evaluate area conditions
+            if (area > PARAMETERS.AREA1) {
+                largeArea = true;
+            }
+
+            if (area < PARAMETERS.AREA2) {
+                smallArea = true;
+            }
+
+            // Check if both conditions are met
+            if (largeArea && smallArea) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
