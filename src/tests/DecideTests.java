@@ -174,6 +174,11 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC6());
     }
 
+    // LIC 7 positive test
+    // Sets two points to values that result in the distance between a set of them separated by
+    // exact K_PTS consecutive points being greater than LENGTH1.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: false
     @Test
     public void test_LIC7_true() {
         Decide.X = new double[]{1, 2, 1, 2, 5, 3};
@@ -184,6 +189,11 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC7());
     }
 
+    // LIC 7 negative test
+    // Sets all points to values that result in no distance between a set of them separated by
+    // exact K_PTS consecutive points being greater than LENGTH1.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
     @Test
     public void test_LIC7_false() {
         Decide.X = new double[]{1, 2, 1, 2, 2, 3};
@@ -312,6 +322,11 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC11());
     }
 
+    // LIC 12 positive test
+    // Sets two points to values that result in the distance between a set of them separated by
+    // exact K_PTS consecutive points being greater than LENGTH1 and less than LENGTH2.
+    // According to the requirements specification this should make the condition evaluate to true.
+    // Excepted result from method call: true
     @Test
     public void test_LIC12_true(){
         Decide.X = new double[] {1, 2, 1, 2, 5, 3};
@@ -323,6 +338,11 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC12());
     }
 
+    // LIC 12 negative test
+    // Sets all points to values that result in the distance between a set of them separated by
+    // exact K_PTS consecutive points being greater than LENGTH1 but not less than LENGTH2.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: false
     @Test
     public void test_LIC12_false(){
         Decide.X = new double[] {1, 2, 1, 2, 2, 3};
@@ -334,6 +354,11 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC12());
     }
 
+    // LIC 13 positive test
+    // Sets three points to values separated by exact A_PTS and B_PTS that result in them not being
+    // contained in a circle of radius RADIUS1 while also being contained in a circle of radius RADIUS2.
+    // According to the requirements specification this should make the condition evaluate to true.
+    // Excepted result from method call: true;
     @Test
     public void test_LIC13_true() {
         Decide.X = new double[]{1, 5, 1, 2, 3, 5};
@@ -346,6 +371,11 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC13());
     }
 
+    // LIC 13 false test
+    // Sets three points to values separated by exact A_PTS and B_PTS that result in them not being
+    // contained in a circle of radius RADIUS1 while also not being contained in a circle of radius RADIUS2.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: false;
     @Test
     public void test_LIC13_false() {
         Decide.X = new double[]{1, 2, 1, 2, 1, 3};
