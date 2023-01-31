@@ -53,6 +53,18 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC0());
     }
 
+    // LIC0: Test whether the condition evaluates to false for invalid input.
+    //
+    // The condition should not be met if the parameter LENGTH1 is negative. Thus,
+    // we set the parameter LENGTH1 to -1, so that the condition should evaluate to false.
+    //
+    // Expected output: false
+    @Test
+    public void test_LIC0_false_2(){
+        Decide.PARAMETERS.LENGTH1 = -1;
+        Assertions.assertFalse(Decide.LIC0());
+    }
+
     @Test
     public void test_LIC1_true() {
         Decide.X = new double[]{1, 5, 1, 2, 3, 5};
@@ -238,6 +250,14 @@ public class DecideTests {
         Decide.PARAMETERS.D_PTS = 1;
         Decide.X = new double[]{0, 1, 0, 2, 3};
         Decide.Y = new double[]{0, 2, 0, 3, 4};
+        Assertions.assertFalse(Decide.LIC9());
+    }
+
+    @Test
+    public void test_LIC9_false_4(){
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.C_PTS = 2;
+        Decide.PARAMETERS.D_PTS = 2;
         Assertions.assertFalse(Decide.LIC9());
     }
 
