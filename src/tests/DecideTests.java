@@ -179,6 +179,20 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC7());
     }
 
+    // LIC 7 negative test
+    // Set NUMPOINTS to value less then 3.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC7_false2() {
+        Decide.X = new double[]{1, 2};
+        Decide.Y = new double[]{1, 1};
+        Decide.NUMPOINTS = 2;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Assertions.assertFalse(Decide.LIC7());
+    }
+
     @Test
     public void test_LIC8_true() {
         Decide.X = new double[]{6, 3, 2, -1, 1};
@@ -319,6 +333,22 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC12());
     }
 
+    // LIC 12 negative test
+    // Set NUMPOINTS to value less then 5.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC12_false2(){
+        Decide.X = new double[] {1, 2, 1, 2};
+        Decide.Y = new double[] {1, 1, 2, 2};
+        Decide.NUMPOINTS = 4;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Decide.PARAMETERS.LENGTH2 = 10;
+        Assertions.assertFalse(Decide.LIC12());
+    }
+
+
     @Test
     public void test_LIC13_true() {
         Decide.X = new double[]{1, 5, 1, 2, 3, 5};
@@ -329,6 +359,22 @@ public class DecideTests {
         Decide.PARAMETERS.RADIUS2 = 8;
         Decide.NUMPOINTS = 6;
         Assertions.assertTrue(Decide.LIC13());
+    }
+
+    // LIC 13 negative test
+    // Set NUMPOINTS to value less then 4.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC13_false2() {
+        Decide.X = new double[]{1, 5, 1, 2};
+        Decide.Y = new double[]{1, 1, 5, 3};
+        Decide.PARAMETERS.A_PTS = 1;
+        Decide.PARAMETERS.B_PTS = 1;
+        Decide.PARAMETERS.RADIUS1 = 2;
+        Decide.PARAMETERS.RADIUS2 = 8;
+        Decide.NUMPOINTS = 4;
+        Assertions.assertFalse(Decide.LIC13());
     }
 
     @Test
