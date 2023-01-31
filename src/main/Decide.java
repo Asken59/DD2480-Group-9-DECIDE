@@ -42,6 +42,27 @@ public class Decide {
         if (LAUNCH) System.out.println("YES");
         else System.out.println("NO");
     }
+
+    public static void CMV() {
+
+        CMV = new Boolean[15];
+
+        CMV[0] = LIC0();
+        CMV[1] = LIC1();
+        CMV[2] = LIC2();
+        CMV[3] = LIC3();
+        CMV[4] = LIC4();
+        CMV[5] = LIC5();
+        CMV[6] = LIC6();
+        CMV[7] = LIC7();
+        CMV[8] = LIC8();
+        CMV[9] = LIC9();
+        CMV[10] = LIC10();
+        CMV[11] = LIC11();
+        CMV[12] = LIC12();
+        CMV[13] = LIC13();
+        CMV[14] = LIC14();
+    }
     
     public static void generatePUM() {
         // PUM is a 15 x 15 matrix
@@ -63,7 +84,6 @@ public class Decide {
             }
         }
     }
-
 
     public static void CMV() {
 
