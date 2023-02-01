@@ -86,6 +86,18 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC0());
     }
 
+    // LIC0: Test whether the condition evaluates to false for invalid input.
+    //
+    // The condition should not be met if the parameter LENGTH1 is negative. Thus,
+    // we set the parameter LENGTH1 to -1, so that the condition should evaluate to false.
+    //
+    // Expected output: false
+    @Test
+    public void test_LIC0_false_2() {
+        Decide.PARAMETERS.LENGTH1 = -1;
+        Assertions.assertFalse(Decide.LIC0());
+    }
+
     // LIC 1 positive test
     // Sets all points to values that will result in at least one set of three consecutive
     // points which can not be contained within or on a circle of radius RADIUS1.
@@ -111,6 +123,16 @@ public class DecideTests {
         Decide.Y = new double[]{1, 1, 2, 2, 3, 2};
         Decide.PARAMETERS.RADIUS1 = 3;
         Decide.NUMPOINTS = 6;
+        Assertions.assertFalse(Decide.LIC1());
+    }
+
+    // LIC1: Negative test
+    // Sets RADIUS1 to -1, which should result in false as one requirement
+    // was RADIUS1 >= 0.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC1_false_2() {
+        Decide.PARAMETERS.RADIUS1 = -1;
         Assertions.assertFalse(Decide.LIC1());
     }
 
@@ -142,6 +164,19 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC2());
     }
 
+    // LIC2: Negative test
+    // Sets EPSILON to -1, which should result in false as one requirement
+    // was EPSILON >= 0.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC2_false_2() {
+        Decide.NUMPOINTS = 5;
+        Decide.X = new double[]{0, -1, 0, 1, 0};
+        Decide.Y = new double[]{0, 1, 0, 1, 0};
+        Decide.PARAMETERS.EPSILON = -1;
+        Assertions.assertFalse(Decide.LIC2());
+    }
+
     // LIC3 Positive test
     // The parameters NUMPOINTS, X, and Y are set up to form a triangle at (0,0) (4,0) (4,4) with area 8
     // AREA1 is set to slightly less than 8
@@ -167,6 +202,18 @@ public class DecideTests {
         Decide.X = new double[]{1, 0, 4, 4, 2};
         Decide.Y = new double[]{1, 0, 0, 4, 2};
         Decide.PARAMETERS.AREA1 = 8.1;
+        Assertions.assertFalse(Decide.LIC3());
+    }
+
+    // LIC3: Negative test
+    // Sets AREA1 to -1, which should result in false as one requirement was AREA1 >= 0.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC3_false_2() {
+        Decide.NUMPOINTS = 5;
+        Decide.X = new double[]{1, 0, 4, 4, 2};
+        Decide.Y = new double[]{1, 0, 0, 4, 2};
+        Decide.PARAMETERS.AREA1 = -1;
         Assertions.assertFalse(Decide.LIC3());
     }
 
@@ -203,6 +250,78 @@ public class DecideTests {
         Decide.PARAMETERS.Q_PTS = 2;
         Decide.X = new double[]{0, 0, 0, 0, 0};
         Decide.Y = new double[]{0, 0, 0, 0, 0};
+        Assertions.assertFalse(Decide.LIC4());
+    }
+
+    /*
+       LIC4 negative test
+       The parameters are NUMPOINTS, QUADS, Q_PTS, X, and Y
+       NUMPOINTS are the number of points tested. QUADS are the number of QUAD quadrant that need to be less than
+       the number of consecutive points in distinct quadrants. The X, and Y represent coordinates for each of the NUMPOINTS points
+       The test contains two points, valid QUADS, and Q_PTS values but the number of NUMPOINTS less than the number of Q_PTS fail
+       Expected result false
+     */
+    @Test
+    public void test_LIC4_false_invalid_1() {
+        Decide.NUMPOINTS = 2;
+        Decide.PARAMETERS.QUADS = 3;
+        Decide.PARAMETERS.Q_PTS = 3;
+        Decide.X = new double[]{0, -1};
+        Decide.Y = new double[]{0, -1};
+        Assertions.assertFalse(Decide.LIC4());
+    }
+
+    /*
+       LIC4 negative test
+       The parameters are NUMPOINTS, QUADS, Q_PTS, X, and Y
+       NUMPOINTS are the number of points tested. QUADS are the number of QUAD quadrant that need to be less than
+       the number of consecutive points in distinct quadrants. The X, and Y represent coordinates for each of the NUMPOINTS points
+       The test contains five valid points, valid QUADS, and Q_PTS values but the number of Q_PTS is invalid so the test will fail
+       Expected result false
+    */
+    @Test
+    public void test_LIC4_false_invalid_2() {
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.QUADS = 3;
+        Decide.PARAMETERS.Q_PTS = 1;
+        Decide.X = new double[]{0, -1, 1, -1, 0};
+        Decide.Y = new double[]{0, -1, -2, 1, 0};
+        Assertions.assertFalse(Decide.LIC4());
+    }
+
+    /*
+       LIC4 negative test
+       The parameters are NUMPOINTS, QUADS, Q_PTS, X, and Y
+       NUMPOINTS are the number of points tested. QUADS are the number of QUAD quadrant that need to be less than
+       the number of consecutive points in distinct quadrants. The X, and Y represent coordinates for each of the NUMPOINTS points
+       The test contains five valid points, valid Q_PTS values but the number of QUADS is invalid so the test will fail
+       Expected result false
+    */
+    @Test
+    public void test_LIC4_false_invalid_3() {
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.QUADS = 0;
+        Decide.PARAMETERS.Q_PTS = 2;
+        Decide.X = new double[]{0, -1, 1, -1, 0};
+        Decide.Y = new double[]{0, -1, -2, 1, 0};
+        Assertions.assertFalse(Decide.LIC4());
+    }
+
+    /*
+       LIC4 negative test
+       The parameters are NUMPOINTS, QUADS, Q_PTS, X, and Y
+       NUMPOINTS are the number of points tested. QUADS are the number of QUAD quadrant that need to be less than
+       the number of consecutive points in distinct quadrants. The X, and Y represent coordinates for each of the NUMPOINTS points
+       The test contains five valid points, valid Q_PTS values but the number of QUADS is invalid so the test will fail
+       Expected result false
+    */
+    @Test
+    public void test_LIC4_false_invalid_4() {
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.QUADS = 4;
+        Decide.PARAMETERS.Q_PTS = 2;
+        Decide.X = new double[]{0, -1, 1, -1, 0};
+        Decide.Y = new double[]{0, -1, -2, 1, 0};
         Assertions.assertFalse(Decide.LIC4());
     }
 
@@ -261,9 +380,45 @@ public class DecideTests {
     @Test
     public void test_LIC6_false() {
         Decide.NUMPOINTS = 3;
-        Decide.PARAMETERS.N_PTS = 3;
+        Decide.PARAMETERS.N_PTS = 2;
         Decide.X = new double[]{1, 2, 3};
         Decide.Y = new double[]{1, 2, 3};
+        Assertions.assertFalse(Decide.LIC6());
+    }
+
+    /*
+        LIC6 negative test
+        The Parameters are NUMPOINTS, N_PTS, X, and Y
+        NUMPOINTS are the number of points tested, N_PTS are the number of consecutive poitns tested and X represent the X coordinates for each of the NUMPOINTS points.
+        The test contains three different points where there are at least N_PTS consecutive points where the line distance of the first
+        and last of these is not lesser than the distance of at least one of the points to this between these two points.
+        Invalid NUMPOINTS, and N_PTS values due to the latter being larger than the former
+        Expected result false
+     */
+    @Test
+    public void test_LIC6_invalid_1() {
+        Decide.NUMPOINTS = 3;
+        Decide.PARAMETERS.N_PTS = 4;
+        Decide.X = new double[]{1, 4, 0};
+        Decide.Y = new double[]{1, 4, 0};
+        Assertions.assertFalse(Decide.LIC6());
+    }
+
+    /*
+        LIC6 negative test
+        The Parameters are NUMPOINTS, N_PTS, X, and Y
+        NUMPOINTS are the number of points tested, N_PTS are the number of consecutive poitns tested and X represent the X coordinates for each of the NUMPOINTS points.
+        The test contains three different points where there are at least N_PTS consecutive points where the line distance of the first
+        and last of these is not lesser than the distance of at least one of the points to this between these two points.
+        Invalid input due to the number of NUMPOINTS being less than 3
+        Expected result false
+     */
+    @Test
+    public void test_LIC6_invalid_2() {
+        Decide.NUMPOINTS = 2;
+        Decide.PARAMETERS.N_PTS = 2;
+        Decide.X = new double[]{1, 0};
+        Decide.Y = new double[]{1, 0};
         Assertions.assertFalse(Decide.LIC6());
     }
 
@@ -292,6 +447,20 @@ public class DecideTests {
         Decide.X = new double[]{1, 2, 1, 2, 2, 3};
         Decide.Y = new double[]{1, 1, 2, 2, 2, 2};
         Decide.NUMPOINTS = 6;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Assertions.assertFalse(Decide.LIC7());
+    }
+
+    // LIC 7 negative test
+    // Set NUMPOINTS to value less then 3.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC7_false2() {
+        Decide.X = new double[]{1, 2};
+        Decide.Y = new double[]{1, 1};
+        Decide.NUMPOINTS = 2;
         Decide.PARAMETERS.K_PTS = 3;
         Decide.PARAMETERS.LENGTH1 = 4;
         Assertions.assertFalse(Decide.LIC7());
@@ -326,6 +495,28 @@ public class DecideTests {
         Decide.NUMPOINTS = 5;
         Decide.PARAMETERS.A_PTS = 1;
         Decide.PARAMETERS.B_PTS = 1;
+        Assertions.assertFalse(Decide.LIC8());
+    }
+
+    // LIC8: Negative test
+    // Sets NUMPOINTS to 4, which should result in false as one requirement
+    // was NUMPOINTS >= 5.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC8_false_2() {
+        Decide.NUMPOINTS = 4;
+        Assertions.assertFalse(Decide.LIC8());
+    }
+
+    // LIC8: Negative test
+    // Sets NUMPOINTS to 7, A_PTS and B_PTS to 3, which should result in false as one requirement
+    // was A_PTS + B_PTS <= NUMPOINTS - 3.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC8_false_3() {
+        Decide.PARAMETERS.A_PTS = 3;
+        Decide.PARAMETERS.B_PTS = 3;
+        Decide.NUMPOINTS = 7;
         Assertions.assertFalse(Decide.LIC8());
     }
 
@@ -400,6 +591,22 @@ public class DecideTests {
         Decide.PARAMETERS.D_PTS = 1;
         Decide.X = new double[]{0, 1, 0, 2, 3};
         Decide.Y = new double[]{0, 2, 0, 3, 4};
+        Assertions.assertFalse(Decide.LIC9());
+    }
+
+    // LIC10: Test whether the condition evaluates to false when passed invalid input.
+    //
+    // The condition cannot be met if the number of consecutive intervening points (C_PTS+D_PTS)
+    // spare less than 3 points for the triangle (C_PTS+D_PTS > NUMPOINTS-3).
+    // We set the parameter NUMPOINTS to 5 (valid) and both C_PTS and D_PTS to 4 so that the
+    // condition should evaluate to false.
+    //
+    // Expected output: false
+    @Test
+    public void test_LIC9_false_4() {
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.C_PTS = 2;
+        Decide.PARAMETERS.D_PTS = 2;
         Assertions.assertFalse(Decide.LIC9());
     }
 
@@ -498,6 +705,18 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC11());
     }
 
+    // LIC11: Negative test
+    // Sets G_PTS to -1, which should result in false as one requirement was G_PTS >= 0.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC11_false_2() {
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.G_PTS = -1;
+        Decide.X = new double[]{1, 3, 3, 2, 4};
+        Decide.Y = new double[]{2, 5, 1, 1, 1};
+        Assertions.assertFalse(Decide.LIC11());
+    }
+
     // LIC 12 positive test
     // Sets two points to values that result in the distance between a set of them separated by
     // exact K_PTS consecutive points being greater than LENGTH1 and less than LENGTH2.
@@ -530,6 +749,22 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC12());
     }
 
+    // LIC 12 negative test
+    // Set NUMPOINTS to value less then 5.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC12_false2() {
+        Decide.X = new double[]{1, 2, 1, 2};
+        Decide.Y = new double[]{1, 1, 2, 2};
+        Decide.NUMPOINTS = 4;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Decide.PARAMETERS.LENGTH2 = 10;
+        Assertions.assertFalse(Decide.LIC12());
+    }
+
+
     // LIC 13 positive test
     // Sets three points to values separated by exact A_PTS and B_PTS that result in them not being
     // contained in a circle of radius RADIUS1 while also being contained in a circle of radius RADIUS2.
@@ -545,6 +780,22 @@ public class DecideTests {
         Decide.PARAMETERS.RADIUS2 = 8;
         Decide.NUMPOINTS = 6;
         Assertions.assertTrue(Decide.LIC13());
+    }
+
+    // LIC 13 negative test
+    // Set NUMPOINTS to value less then 4.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC13_false2() {
+        Decide.X = new double[]{1, 5, 1, 2};
+        Decide.Y = new double[]{1, 1, 5, 3};
+        Decide.PARAMETERS.A_PTS = 1;
+        Decide.PARAMETERS.B_PTS = 1;
+        Decide.PARAMETERS.RADIUS1 = 2;
+        Decide.PARAMETERS.RADIUS2 = 8;
+        Decide.NUMPOINTS = 4;
+        Assertions.assertFalse(Decide.LIC13());
     }
 
     // LIC 13 negative test

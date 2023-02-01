@@ -127,6 +127,10 @@ public class Decide {
     // Launch Interceptor Condition 1.
     public static Boolean LIC1() {
 
+        if (PARAMETERS.RADIUS1 < 0) {
+            return false;
+        }
+
         for (int i = 0; i < (NUMPOINTS - 2); i++) {
             double x1 = X[i];
             double y1 = Y[i];
