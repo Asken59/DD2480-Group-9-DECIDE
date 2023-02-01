@@ -18,7 +18,24 @@ public class DecideTests {
         );
     }
 
+    // All LICs: Test whether each LIC evaluates to false when there are no data points.
+    //
+    // We set the NUMPOINTS variable to 0 and initialize X and Y to empty arrays.
+    //
+    // Expected output: false
     @Test
+    public void test_all_LICs_no_points_false(){
+        Decide.NUMPOINTS = 0;
+        Decide.X = new double[]{};
+        Decide.Y = new double[]{};
+        Assertions.assertFalse(
+    Decide.LIC0() || Decide.LIC1() || Decide.LIC2() || Decide.LIC3() || Decide.LIC4()
+            || Decide.LIC5() || Decide.LIC6() || Decide.LIC7() || Decide.LIC8() || Decide.LIC9()
+            ||  Decide.LIC10() || Decide.LIC11() || Decide.LIC12() || Decide.LIC13() || Decide.LIC14()
+        );
+    }
+
+    @Test 
     public void test_generatePUM() {
         Decide.CMV = new Boolean[]{true, true, false, true, true, true, true, true, true, true, true, true, true, true, true};
         Decide.LCM = new Decide.Connectors[15][15];
