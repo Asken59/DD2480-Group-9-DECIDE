@@ -184,6 +184,9 @@ public class Decide {
     }
 
     public static Boolean LIC2() { //Decide if 3 cons. points satisfies an angle < (PI - EPSILON) or > (PI + EPSILON)
+        if(PARAMETERS.EPSILON < 0 || PARAMETERS.EPSILON > Math.PI) //Invalid input checking
+            return false;
+
         double angle = 0;
         double sideA = 0;
         double sideSqrtA = 0;
