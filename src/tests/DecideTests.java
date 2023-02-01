@@ -201,6 +201,20 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC7());
     }
 
+    // LIC 7 negative test
+    // Set NUMPOINTS to value less then 3.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC7_false2() {
+        Decide.X = new double[]{1, 2};
+        Decide.Y = new double[]{1, 1};
+        Decide.NUMPOINTS = 2;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Assertions.assertFalse(Decide.LIC7());
+    }
+
     @Test
     public void test_LIC8_true() {
         Decide.X = new double[]{6, 3, 2, -1, 1};
@@ -285,6 +299,14 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC9());
     }
 
+    // LIC10: Test whether the condition evaluates to false when passed invalid input.
+    //
+    // The condition cannot be met if the number of consecutive intervening points (C_PTS+D_PTS)
+    // spare less than 3 points for the triangle (C_PTS+D_PTS > NUMPOINTS-3).
+    // We set the parameter NUMPOINTS to 5 (valid) and both C_PTS and D_PTS to 4 so that the
+    // condition should evaluate to false.
+    //
+    // Expected output: false
     @Test
     public void test_LIC9_false_4(){
         Decide.NUMPOINTS = 5;
@@ -371,6 +393,22 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC12());
     }
 
+    // LIC 12 negative test
+    // Set NUMPOINTS to value less then 5.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC12_false2(){
+        Decide.X = new double[] {1, 2, 1, 2};
+        Decide.Y = new double[] {1, 1, 2, 2};
+        Decide.NUMPOINTS = 4;
+        Decide.PARAMETERS.K_PTS = 3;
+        Decide.PARAMETERS.LENGTH1 = 4;
+        Decide.PARAMETERS.LENGTH2 = 10;
+        Assertions.assertFalse(Decide.LIC12());
+    }
+
+
     @Test
     public void test_LIC13_true() {
         Decide.X = new double[]{1, 5, 1, 2, 3, 5};
@@ -381,6 +419,22 @@ public class DecideTests {
         Decide.PARAMETERS.RADIUS2 = 8;
         Decide.NUMPOINTS = 6;
         Assertions.assertTrue(Decide.LIC13());
+    }
+
+    // LIC 13 negative test
+    // Set NUMPOINTS to value less then 4.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: False
+    @Test
+    public void test_LIC13_false2() {
+        Decide.X = new double[]{1, 5, 1, 2};
+        Decide.Y = new double[]{1, 1, 5, 3};
+        Decide.PARAMETERS.A_PTS = 1;
+        Decide.PARAMETERS.B_PTS = 1;
+        Decide.PARAMETERS.RADIUS1 = 2;
+        Decide.PARAMETERS.RADIUS2 = 8;
+        Decide.NUMPOINTS = 4;
+        Assertions.assertFalse(Decide.LIC13());
     }
 
     @Test
