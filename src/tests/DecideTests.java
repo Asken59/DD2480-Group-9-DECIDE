@@ -111,6 +111,19 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC2());
     }
 
+    // LIC2: Negative test
+    // Sets EPSILON to -1, which should result in false as one requirement
+    // was EPSILON >= 0.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC2_false_2() {
+        Decide.NUMPOINTS = 5;
+        Decide.X = new double[]{0, -1, 0, 1, 0};
+        Decide.Y = new double[]{0, 1, 0, 1, 0};
+        Decide.PARAMETERS.EPSILON = -1;
+        Assertions.assertFalse(Decide.LIC2());
+    }
+
     @Test
     public void test_LIC3_true() {
         Decide.NUMPOINTS = 5;
