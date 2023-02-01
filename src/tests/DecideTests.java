@@ -142,6 +142,18 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC3());
     }
 
+    // LIC3: Negative test
+    // Sets AREA1 to -1, which should result in false as one requirement was AREA1 >= 0.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC3_false_2() {
+        Decide.NUMPOINTS = 5;
+        Decide.X = new double[]{1, 0, 4, 4, 2};
+        Decide.Y = new double[]{1, 0, 0, 4, 2};
+        Decide.PARAMETERS.AREA1 = -1;
+        Assertions.assertFalse(Decide.LIC3());
+    }
+
     @Test
     public void test_LIC4_true() {
         Decide.NUMPOINTS = 5;
