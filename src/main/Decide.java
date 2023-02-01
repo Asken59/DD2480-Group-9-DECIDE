@@ -112,6 +112,11 @@ public class Decide {
     // Launch Interceptor Condition 0. For further details, see documented requirements.
     public static Boolean LIC0() {
 
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
+
         // Enforce non-negative LENGTH1 parameter
         if(PARAMETERS.LENGTH1 < 0) return false;
 
@@ -126,6 +131,11 @@ public class Decide {
 
     // Launch Interceptor Condition 1.
     public static Boolean LIC1() {
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
 
         if (PARAMETERS.RADIUS1 < 0) {
             return false;
@@ -188,6 +198,12 @@ public class Decide {
     }
 
     public static Boolean LIC2() { //Decide if 3 cons. points satisfies an angle < (PI - EPSILON) or > (PI + EPSILON)
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
+
         if(PARAMETERS.EPSILON < 0 || PARAMETERS.EPSILON > Math.PI) //Invalid input checking
             return false;
 
@@ -224,6 +240,12 @@ public class Decide {
 
 
     public static Boolean LIC3() { //Decide if the area of a triangle formed by 3 cons. points is greater than AREA1
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
+
         if(PARAMETERS.AREA1 < 0) //Invalid input
             return false;
 
@@ -245,6 +267,11 @@ public class Decide {
     // is in quadrant I, the point (-l,0) is in quadrant II, the point (0,-l) is in quadrant III, the point
     // (0,1) is in quadrant I and the point (1,0) is in quadrant I.
     public static Boolean LIC4() {
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
 
         // return false if PARAMETER input values are invalid
         if (PARAMETERS.Q_PTS < 2 || PARAMETERS.Q_PTS > NUMPOINTS) return false;
@@ -290,6 +317,11 @@ public class Decide {
     // that X[j] - X[i] < 0. (where i = j-1)
     public static Boolean LIC5() {
 
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
+
         for (int i = 0; i < NUMPOINTS - 1; i++) {
 
             if ((X[i + 1] - X[i]) < 0) return true;
@@ -304,6 +336,11 @@ public class Decide {
     // to compare with DIST will be the distance from the coincident point to all other points of
     // the N PTS consecutive points. The condition is not met when NUMPOINTS < 3.
     public static Boolean LIC6() {
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
 
         if (NUMPOINTS < 3) return false;
         if (NUMPOINTS < PARAMETERS.N_PTS) return false;
@@ -337,6 +374,11 @@ public class Decide {
     // Launch Interceptor Condition 7.
     public static Boolean LIC7() {
 
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
+
         // Check so that NUMBPOINTS is >= 3 as per specification, also checks that a set could possibly exist for the
         // given K_PTS parameter value
         if (NUMPOINTS >= 3 && NUMPOINTS >= (PARAMETERS.K_PTS + 2)) {
@@ -354,6 +396,11 @@ public class Decide {
     }
 
     public static Boolean LIC8() {
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
 
         if (NUMPOINTS < 5 || PARAMETERS.A_PTS < 1 || PARAMETERS.B_PTS < 1 ||
                 PARAMETERS.A_PTS + PARAMETERS.B_PTS > NUMPOINTS - 3) {
@@ -421,6 +468,11 @@ public class Decide {
     // Launch Interceptor Condition 9. For further details, see documented requirements.
     public static Boolean LIC9() {
 
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
+
         // The condition cannot be met if:
         if ((NUMPOINTS < 5) || (PARAMETERS.C_PTS < 1) ||
                 (PARAMETERS.D_PTS < 1) || (PARAMETERS.C_PTS + PARAMETERS.D_PTS > NUMPOINTS - 3))
@@ -457,6 +509,11 @@ public class Decide {
     // Launch Interceptor Condition 10. For further details, see documented requirements.
     public static Boolean LIC10() {
 
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
+
         // The condition is not met if:
         if ((NUMPOINTS < 5) || (PARAMETERS.E_PTS < 1) || (PARAMETERS.F_PTS < 1) ||
                 (PARAMETERS.E_PTS + PARAMETERS.F_PTS > NUMPOINTS - 3))
@@ -488,6 +545,12 @@ public class Decide {
 
     // Launch Interceptor Condition 11. For further details, see documented requirements.
     public static Boolean LIC11() {
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
+
         if(PARAMETERS.G_PTS < 0) //Invalid input
             return false;
 
@@ -501,6 +564,11 @@ public class Decide {
 
     // Launch Interceptor Condition 12.
     public static Boolean LIC12() {
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
 
         // Check so that NUMBPOINTS is >= 3 as per specification, also checks that a set could possibly exist for the
         // given K_PTS parameter value
@@ -530,6 +598,11 @@ public class Decide {
 
     // Launch Interceptor Condition 13.
     public static Boolean LIC13() {
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
 
         // Check so that NUMBPOINTS is >= 5 as per specification, also checks that a set could possibly exist for the
         // given A_PTS and B_PTS parameter values
@@ -605,6 +678,11 @@ public class Decide {
 
     // Launch Interceptor Condition 14. For further details, see documented requirements.
     public static Boolean LIC14() {
+
+        // Checks for to many data points
+        if (NUMPOINTS > 100) {
+            return false;
+        }
 
         boolean largeArea = false;
         boolean smallArea = false;
