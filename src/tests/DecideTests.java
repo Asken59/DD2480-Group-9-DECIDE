@@ -367,7 +367,7 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC8());
     }
 
-    // LIC14: Negative test
+    // LIC8: Negative test
     // Sets NUMPOINTS to 4, which should result in false as one requirement
     // was NUMPOINTS >= 5.
     // Expected result from method call: false
@@ -377,7 +377,7 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC8());
     }
 
-    // LIC14: Negative test
+    // LIC8: Negative test
     // Sets NUMPOINTS to 7, A_PTS and B_PTS to 3, which should result in false as one requirement
     // was A_PTS + B_PTS <= NUMPOINTS - 3.
     // Expected result from method call: false
@@ -496,6 +496,18 @@ public class DecideTests {
     public void test_LIC11_false() {
         Decide.NUMPOINTS = 5;
         Decide.PARAMETERS.G_PTS = 2;
+        Decide.X = new double[]{1, 3, 3, 2, 4};
+        Decide.Y = new double[]{2, 5, 1, 1, 1};
+        Assertions.assertFalse(Decide.LIC11());
+    }
+
+    // LIC11: Negative test
+    // Sets G_PTS to -1, which should result in false as one requirement was G_PTS >= 0.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC11_false_2() {
+        Decide.NUMPOINTS = 5;
+        Decide.PARAMETERS.G_PTS = -1;
         Decide.X = new double[]{1, 3, 3, 2, 4};
         Decide.Y = new double[]{2, 5, 1, 1, 1};
         Assertions.assertFalse(Decide.LIC11());
