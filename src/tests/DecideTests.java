@@ -35,6 +35,12 @@ public class DecideTests {
         );
     }
 
+    // Generate the Preliminary Unlocking Matrix
+    // Sets values in CMV and LCM so that the behaviur of ORR, ANDD and NOTUSED can be tested.
+    // Asserts that TRUE ANDD FALSE will generate FALSE as per the specification.
+    // Asserts that TRUE ORR FALSE will generate TRUE as per the specification.
+    // Asserts that NOTUSED will generate TRUE as per the specification.
+    // Expected results of method calls: TRUE, TRUE, FALSE
     @Test 
     public void test_generatePUM() {
         Decide.CMV = new Boolean[]{true, true, false, true, true, true, true, true, true, true, true, true, true, true, true};
