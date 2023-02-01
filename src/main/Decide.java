@@ -112,6 +112,9 @@ public class Decide {
     // Launch Interceptor Condition 0. For further details, see documented requirements.
     public static Boolean LIC0() {
 
+        // Enforce non-negative LENGTH1 parameter
+        if(PARAMETERS.LENGTH1 < 0) return false;
+
         for (int i = 0; i < NUMPOINTS - 1; i++) {
             // Euclidean distance
             double distance = Math.sqrt(Math.pow(X[i] - X[i + 1], 2) + Math.pow(Y[i] - Y[i + 1], 2));
