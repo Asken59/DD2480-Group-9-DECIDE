@@ -1,5 +1,3 @@
-package main;
-
 public class Parameters_t {
     public double LENGTH1;
     public double RADIUS1;
