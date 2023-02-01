@@ -69,6 +69,11 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC0());
     }
 
+    // LIC 1 positive test
+    // Sets all points to values that will result in at least one set of three consecutive
+    // points which can not be contained within or on a circle of radius RADIUS1.
+    // According to the requirements specification this should make the condition evaluate to true.
+    // Excepted result from method call: true
     @Test
     public void test_LIC1_true() {
         Decide.X = new double[]{1, 5, 1, 2, 3, 5};
@@ -78,6 +83,11 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC1());
     }
 
+    // LIC 1 negative test
+    // Sets all points to values so that all sets of three consecutive data points
+    // can be contained within or on a circle of radius RADIUS1.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: false
     @Test
     public void test_LIC1_false() {
         Decide.X = new double[]{1, 2, 1, 2, 1, 3};
@@ -250,6 +260,11 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC7());
     }
 
+    // LIC 8 positive test
+    // Sets all points to values so that all sets of three data points, preceded
+    // by A_PTS and B_TS can not be contained within or on a circle of radius RADIUS1.
+    // According to the requirements specification this should make the condition evaluate to true.
+    // Excepted result from method call: true
     @Test
     public void test_LIC8_true() {
         Decide.X = new double[]{6, 3, 2, -1, 1};
@@ -261,6 +276,11 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC8());
     }
 
+    // LIC 8 negative test
+    // Sets all points to values so that all sets of three data points, preceded
+    // by A_PTS and B_TS can be contained within or on a circle of radius RADIUS1.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: false
     @Test
     public void test_LIC8_false() {
         Decide.X = new double[]{6, 3, 2, -1, 1};
@@ -497,6 +517,13 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC13());
     }
 
+    // LIC14: Positive test
+    // Sets data points so that three points preceded by E_PTS and F_PTS
+    // consecutive points. The points are set such as if three points form a
+    // triangle, one set of points triangle has an area larger than AREA1, and
+    // one set of points triangle has an area smaller than AREA2.
+    // According to the requirements specification this should make the condition evaluate to true.
+    // Excepted result from method call: true
     @Test
     public void test_LIC14_true() {
         Decide.NUMPOINTS = 6;
@@ -509,6 +536,13 @@ public class DecideTests {
         Assertions.assertTrue(Decide.LIC14());
     }
 
+    // LIC14: Positive test
+    // Sets data points so that three points preceded by E_PTS and F_PTS
+    // consecutive points. The points are set such as if three points form a
+    // triangle, no set of points triangle has an area larger than AREA1, or
+    // no set of points triangle has an area smaller than AREA2.
+    // According to the requirements specification this should make the condition evaluate to false.
+    // Excepted result from method call: false
     @Test
     public void test_LIC14_false_1() {
         Decide.NUMPOINTS = 6;
@@ -521,6 +555,10 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC14());
     }
 
+    // LIC14: Negative test
+    // Sets numpoints to 4, which should result in false as one requirement
+    // was NUMPOINTS >= 5.
+    // Expected result from method call: false
     @Test
     public void test_LIC14_false_2() {
         Decide.NUMPOINTS = 4;
