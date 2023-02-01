@@ -23,3 +23,10 @@ Merging and merge conflict resolutions were done on one a case to case basis eit
 The rest of the work, like writing this README, updating comments or adding missing functionality was also done ad-hoc individually by the commiter or in a group as a sort of over the shoulder work style.
 
 All pull requests were reviewed by at least one other member in the group, often someone that happened to be available at the time.
+
+## Essence, our way of working
+We evaluated that according to the [essence checklist](https://www.omg.org/spec/Essence/1.2/PDF) (p. 60), we are working on the "In Place" level.
+This is because we fulfill all the checklist items before "In Place" in addition to the ones directly linked to "In Place".
+All team members have access to the practices and tools we set out to use, and all team members actually use those tools and practices. Through meetings and online communication we are also all involved in the inspection and adaption of the way of working.
+
+The reason we are not working on the "Working well" level yet is that we do not fulfill some requirements such as naturally applying all our practices without thinking about them.
