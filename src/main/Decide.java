@@ -484,6 +484,9 @@ public class Decide {
 
     // Launch Interceptor Condition 11. For further details, see documented requirements.
     public static Boolean LIC11() {
+        if(PARAMETERS.G_PTS < 0) //Invalid input
+            return false;
+
         for (int i = 0; i < NUMPOINTS - PARAMETERS.G_PTS - 1; i++) {
             if (X[i + PARAMETERS.G_PTS + 1] - X[i] < 0) {
                 return true;
