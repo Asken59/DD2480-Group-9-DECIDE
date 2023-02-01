@@ -83,6 +83,16 @@ public class DecideTests {
         Assertions.assertFalse(Decide.LIC1());
     }
 
+    // LIC1: Negative test
+    // Sets RADIUS1 to -1, which should result in false as one requirement
+    // was RADIUS1 >= 0.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC1_false_2() {
+        Decide.PARAMETERS.RADIUS1 = -1;
+        Assertions.assertFalse(Decide.LIC1());
+    }
+
     @Test
     public void test_LIC2_true() {
         Decide.NUMPOINTS = 5;
@@ -329,6 +339,28 @@ public class DecideTests {
         Decide.NUMPOINTS = 5;
         Decide.PARAMETERS.A_PTS = 1;
         Decide.PARAMETERS.B_PTS = 1;
+        Assertions.assertFalse(Decide.LIC8());
+    }
+
+    // LIC14: Negative test
+    // Sets NUMPOINTS to 4, which should result in false as one requirement
+    // was NUMPOINTS >= 5.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC8_false_2() {
+        Decide.NUMPOINTS = 4;
+        Assertions.assertFalse(Decide.LIC8());
+    }
+
+    // LIC14: Negative test
+    // Sets NUMPOINTS to 7, A_PTS and B_PTS to 3, which should result in false as one requirement
+    // was A_PTS + B_PTS <= NUMPOINTS - 3.
+    // Expected result from method call: false
+    @Test
+    public void test_LIC8_false_3() {
+        Decide.PARAMETERS.A_PTS = 3;
+        Decide.PARAMETERS.B_PTS = 3;
+        Decide.NUMPOINTS = 7;
         Assertions.assertFalse(Decide.LIC8());
     }
 
