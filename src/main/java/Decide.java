@@ -110,6 +110,9 @@ public class Decide {
     // Launch Interceptor Condition 0. For further details, see documented requirements.
     public static Boolean LIC0() {
 
+        // Enforce non-negative LENGTH1 parameter
+        if(PARAMETERS.LENGTH1 < 0) return false;
+
         for (int i = 0; i < NUMPOINTS - 1; i++) {
             // Euclidean distance
             double distance = Math.sqrt(Math.pow(X[i] - X[i + 1], 2) + Math.pow(Y[i] - Y[i + 1], 2));
@@ -179,6 +182,9 @@ public class Decide {
     }
 
     public static Boolean LIC2() { //Decide if 3 cons. points satisfies an angle < (PI - EPSILON) or > (PI + EPSILON)
+        if(PARAMETERS.EPSILON < 0 || PARAMETERS.EPSILON > Math.PI) //Invalid input checking
+            return false;
+
         double angle = 0;
         double sideA = 0;
         double sideSqrtA = 0;
@@ -212,18 +218,16 @@ public class Decide {
 
 
     public static Boolean LIC3() { //Decide if the area of a triangle formed by 3 cons. points is greater than AREA1
+        if(PARAMETERS.AREA1 < 0) //Invalid input
+            return false;
+
         double triArea = 0;
         for (int i = 0; i < NUMPOINTS - 2; i++) { //Loop through consecutive points
             triArea = ((X[i + 1] - X[i]) * (Y[i + 2] - Y[i]) - (X[i + 2] - X[i]) * (Y[i + 1] - Y[i])) / 2; //Shoelace formula
             triArea = Math.abs(triArea);
-
             if (PARAMETERS.AREA1 < triArea) {
 
-
-                if (PARAMETERS.AREA1 < triArea) {
-
-                    return true;
-                }
+                return true;
             }
         }
         return false;
@@ -478,6 +482,9 @@ public class Decide {
 
     // Launch Interceptor Condition 11. For further details, see documented requirements.
     public static Boolean LIC11() {
+        if(PARAMETERS.G_PTS < 0) //Invalid input
+            return false;
+
         for (int i = 0; i < NUMPOINTS - PARAMETERS.G_PTS - 1; i++) {
             if (X[i + PARAMETERS.G_PTS + 1] - X[i] < 0) {
                 return true;
